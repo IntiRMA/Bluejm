@@ -3,7 +3,8 @@ import java.util.*;
 import java.io.*;
 import java.awt.Color;
 public class Game{
-    public static final double ArenaSize =800;
+    public static final double ArenaSize =600;
+    public static final double ArenaSizex =1000;
     public static final int top =0;
     public static final int left=0;
     private int numberStrong;
@@ -30,16 +31,20 @@ public class Game{
     public void mouse(String ev,double x,double y){
 
         if(ev.equalsIgnoreCase("pressed")){
-            this.position = y;
+            if(y<ArenaSize){
+                this.position = y;
+            }else{
+                this.position=0;
+            }
         }
-        if(this.position<200){
-            position=50;
-        }else if(this.position<400){
-            position=250;
+        if(this.position<150){
+            this.position=10;
+        }else if(this.position<300){
+            this.position=210;
+        }else if(this.position<450){
+            this.position=310;
         }else if(this.position<600){
-            position=450;
-        }else if(this.position<800){
-            position=650;
+            this.position=410;
         }
         this.action = ev;
     }
@@ -67,37 +72,25 @@ public class Game{
     }
 
     public void store(){
-        //         boolean T =false;
-        //         Store shop = new Store();
-        //         while (T==false){
-        //             shop.drawStore();
-        //             T=shop.bool();
-        //             this.numberStrong = shop.strong();
-        //             this.numberStealth = shop.stealth();
-        //             this.numberRange = shop.range();
-        //         }
-        this.numberStrong = 5;
-        this.numberStealth = 5;
-        this.numberRange = 5;
+        boolean T =false;
+        Store shop = new Store();
+        while (T==false){
+            shop.drawStore();
+            T=shop.bool();
+            this.numberStrong = shop.strong();
+            this.numberStealth = shop.stealth();
+            this.numberRange = shop.range();
+        }
+        //         this.numberStrong = 5;
+        //         this.numberStealth = 5;
+        //         this.numberRange = 5;
 
         startGame();
 
     }
 
     public void startGame(){
-        /* for(int i =0;i<numberStrong;i++){
-        strong[i] = null;  
-        }
-        for(int k =0;k<numberStealth;k++){
-        String stealthfig = ("stealth" + Integer.toString(k));
-        Figures (stealthfig) = null;  
-        stealth.add( stealthfig);
-        }
-        for(int z =0;z<numberRange;z++){
-        String rangefig = ("range" + Integer.toString(z));
-        Figures (rangefig) = null;  
-        range.add(rangefig);
-        }*/
+
         draw();
         int st = 0;
         int rg= 0;
@@ -184,8 +177,10 @@ public class Game{
     }
 
     public void draw(){
+        UI.setColor(Color.black);
+        UI.setLineWidth(2);
         UI.clearGraphics();
-        UI.drawRect(left,top,ArenaSize,ArenaSize);
+        UI.drawRect(left,top,ArenaSizex,ArenaSize);
         drawWall();
         UI.repaintAllGraphics();
     }
