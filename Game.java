@@ -38,13 +38,13 @@ public class Game{
             }
         }
         if(this.position<150){
-            this.position=10;
+            this.position=50;
         }else if(this.position<300){
-            this.position=210;
+            this.position=200;
         }else if(this.position<450){
-            this.position=310;
+            this.position=350;
         }else if(this.position<600){
-            this.position=410;
+            this.position=450;
         }
         this.action = ev;
     }
