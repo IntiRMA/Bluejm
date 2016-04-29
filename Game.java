@@ -81,15 +81,11 @@ public class Game{
             this.numberRange = shop.range();
 
             T=shop.bool();
-            if(T){
-                break;
-            }
+           
 
         }
 
-        //         this.numberStrong = 15;
-        //         this.numberStealth = 15;
-        //         this.numberRange = 15;
+       
 
         startGame();
 
