@@ -45,7 +45,7 @@ public class Store{
             UI.drawString("stealth: "+numStealth,600,100);
             UI.drawString("strong: "+numStrong,600,150);
             UI.drawString("range: "+numRange,600,200);
-            UI.sleep(20);
+            UI.sleep(40);
         
 
     }
