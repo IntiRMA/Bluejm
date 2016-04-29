@@ -8,6 +8,7 @@ import ecs100.*;
 import java.util.*;
 import java.io.*;
 import java.awt.Color;
+import javax.swing.*;
 
 public class Figures{
 
@@ -53,17 +54,19 @@ public class Figures{
     }
 
     public void draw(){
-        if (type.equals("stealthDude")){
-            UI.drawImage("stealthDude.jpg", positionX, positionY, 71, 100);
-        }
-        if (type.equals("strongDude")){
-            UI.drawImage("strongDude.jpg", positionX, positionY, 118, 100);
-        }
-        if (type.equals("rangeDude")){
-            UI.drawImage("rangeDude.jpg", positionX, positionY, 51.1, 100);
-        }
+        SwingUtilities.invokeLater(()->{
+                if (type.equals("stealthDude")){
+                    UI.drawImage("stealthDude.jpg", positionX, positionY, 71, 100);
+                }
+                if (type.equals("strongDude")){
+                    UI.drawImage("strongDude.jpg", positionX, positionY, 118, 100);
+                }
+                if (type.equals("rangeDude")){
+                    UI.drawImage("rangeDude.jpg", positionX, positionY, 51.1, 100);
+                }
+            });
     }
-    
+
     public void move() {
         this.positionX = positionX - speed;
     }
