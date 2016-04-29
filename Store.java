@@ -22,7 +22,7 @@ public class Store{
         UI.initialise();
         //UI.addButton("Quit", UI::quit);
 
-        drawStore();
+       
     }
     //drawing the store
     public void drawStore(){
@@ -105,9 +105,7 @@ public class Store{
         }else if(xClick>50 && xClick<150 && yClick>500 && yClick<550){
             draw= true;
         }
-       /* if(draw==false){
-            drawStore();
-        }*/
+       
     }
 
     public boolean bool(){
