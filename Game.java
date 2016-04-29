@@ -24,7 +24,7 @@ public class Game{
     public Game(){
         UI.initialise();
         intro();
-        UI.setMouseListener(this::mouse);
+        
         UI.setKeyListener(this::controls);
     }
 
@@ -76,14 +76,20 @@ public class Game{
         Store shop = new Store();
         while (T==false){
             shop.drawStore();
-            T=shop.bool();
             this.numberStrong = shop.strong();
             this.numberStealth = shop.stealth();
             this.numberRange = shop.range();
+
+            T=shop.bool();
+            if(T){
+                break;
+            }
+
         }
-        //         this.numberStrong = 5;
-        //         this.numberStealth = 5;
-        //         this.numberRange = 5;
+
+        //         this.numberStrong = 15;
+        //         this.numberStealth = 15;
+        //         this.numberRange = 15;
 
         startGame();
 
@@ -96,6 +102,7 @@ public class Game{
         int rg= 0;
         int stl = 0;
         boolean D=false;
+        UI.setMouseListener(this::mouse);
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0)&& this.wallHP!=0){
             if(D){
                 draw();
@@ -104,7 +111,7 @@ public class Game{
 
             if(action.equalsIgnoreCase("pressed") && this.turn==0){
                 if(st<numberStrong && (position>0 && position<ArenaSize)){
-                    strong[st] = new Figures("strongDude",ArenaSize-100,this.position);
+                    strong[st] = new Figures("strongDude",ArenaSizex-100,this.position);
                     st++;
                     this.action="";
                 }
@@ -112,7 +119,7 @@ public class Game{
             }
             if(action.equalsIgnoreCase("pressed") && this.turn==1){
                 if(rg<numberRange && (position>0 && position<ArenaSize)){
-                    range[rg] = new Figures("rangeDude",ArenaSize-100,this.position);
+                    range[rg] = new Figures("rangeDude",ArenaSizex-100,this.position);
                     rg++;
                     this.action="";
                 }
@@ -120,7 +127,7 @@ public class Game{
             }
             if(action.equalsIgnoreCase("pressed") && turn==2){
                 if(stl<numberStealth && (position>0 && position<ArenaSize)){
-                    stealth[stl] = new Figures("stealthDude",ArenaSize-100,this.position);
+                    stealth[stl] = new Figures("stealthDude",ArenaSizex-100,this.position);
                     stl++;
                     this.action="";
                 }
@@ -148,7 +155,7 @@ public class Game{
                 }
             }
             //
-            UI.sleep(20);
+            UI.sleep(40);
         }
 
         nextLevel();
