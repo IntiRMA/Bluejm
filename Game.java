@@ -145,6 +145,7 @@ public class Game{
         time = calen.getTimeInMillis();
         long timeninj = ninj.getTimeInMillis();
         long timegun = gun.getTimeInMillis();
+        long timecop = timegun;
 
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0)&& this.wallHP!=0){
             UI.setKeyListener(this::controls);
@@ -220,7 +221,7 @@ public class Game{
                     stealth[z].draw();
                 }
             }
-            cal = Calendar.getInstance();
+
             if(ALARM){
                 defy=90;
                 defx=430;
@@ -235,10 +236,53 @@ public class Game{
                 defy=90;
                 defx=430;
             }
+            //cops attack
+            cal = Calendar.getInstance();
+            long time5 = cal.getTimeInMillis();
+            if(time5 - timecop >= 250){
+                timecop=time5;
+                for(int a=0;a<numCops;a++){
+                    if(cops[a]!=null){
+                        cops[a].draw();
+                        for(int i=0;i<numberStrong;i++){
+                            boolean hit = cops[a].attack(strong[i].getX(),strong[i].getY(),strong[i].getStealth());
+                            double HP =1;
+                            if(hit){
+                                HP = strong[i].hit();
+                            }
+                            if (HP<=0){
+                                strong[i].erase();
+                                strong[i]=null;
+                                numberStrong--;
+                            }
+                        }
 
-            for(int a=0;a<numCops;a++){
-                if(cops[a]!=null){
-                    cops[a].draw();
+                        for(int k=0;k<numberRange;k++){
+                            boolean hit = cops[a].attack(range[k].getX(),range[k].getY(),range[k].getStealth());
+                            double HP =1;
+                            if(hit){
+                                HP = range[k].hit();
+                            }
+                            if (HP<=0){
+                                range[k].erase();
+                                range[k]=null;
+                                numberRange--;
+                            }
+                        }
+
+                        for(int z=0;z<numberStealth;z++){
+                            boolean hit = cops[a].attack(stealth[z].getX(),stealth[z].getY(),stealth[z].getStealth());
+                            double HP =1;
+                            if(hit){
+                                HP = stealth[z].hit();
+                            }
+                            if (HP<=0){
+                                stealth[z].erase();
+                                stealth[z]=null;
+                                numberStealth--;
+                            }
+                        }
+                    }
                 }
             }
             D=true;
