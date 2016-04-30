@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Game{
-    public static final double ArenaSize =400;
+    public static final double ArenaSize =500;
     public static final double wallX =300;
     public static final double ArenaSizex =900;
     public static final int top =0;
@@ -16,7 +16,7 @@ public class Game{
     private double wallHP;
     private double wallStartHP;
     public double alarmHP;
-    private String wall = "wall";
+    private String wall = "level";
     private int level=1;
     private String type = "strong";
     private double position;
@@ -183,11 +183,13 @@ public class Game{
                     strong[i].move();
                     if(time2 - time>=500){
                         this.wallHP-=strong[i].attack();
-                        //time=time2;
+                        time=time2;
                     }
                     strong[i].draw();
                 }
             }
+            calen=Calendar.getInstance();
+            long time3 = calen.getTimeInMillis();
             for(int k=0;k<numberRange;k++){
                 if(range[k]!=null){
                     range[k].move();
@@ -198,11 +200,13 @@ public class Game{
                     range[k].draw();
                 }
             }
+            calen=Calendar.getInstance();
+            long time4 = calen.getTimeInMillis();
             for(int z=0;z<numberStealth;z++){
                 if(stealth[z]!=null){
                     stealth[z].move();
-                    if(time2 - time>=500){
-                        time=time2;
+                    if(time4 - time>=500){
+                        time=time4;
                         alarmHP-=stealth[z].alarmOFF(alarmy);
                         if(alarmHP<=0){
                             ALARM=false;
@@ -302,9 +306,9 @@ public class Game{
             Store.numStealthRange=0;
             Store.numStrongStealthRange=0;
 
-                //             UI.sleep(10);
-                //             UI.drawString("NEXT LEVEL",400,200);
-                //             UI.sleep(5000);
+            //             UI.sleep(10);
+            //             UI.drawString("NEXT LEVEL",400,200);
+            //             UI.sleep(5000);
             store();
         }else{
             won();
@@ -406,10 +410,12 @@ public class Game{
     }
 
     public void drawWall(){
-        if (this.wallHP == this.wallStartHP/2){
-            this.wall=this.wall + "broke";
+        if (this.wallHP <= this.wallStartHP/2){
+            UI.drawImage(this.wall + "broke" + Integer.toString(level) + ".png",0,0,ArenaSizex,ArenaSize);
         }
-        UI.drawImage(this.wall + ".png",wallX,0,20,ArenaSize);
+        if((this.wallHP > this.wallStartHP/2)){
+            UI.drawImage(this.wall + Integer.toString(level) + ".png",0,0,ArenaSizex,ArenaSize);
+        }
     }
 
     public static void main(String[] arguments){

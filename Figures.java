@@ -30,7 +30,7 @@ public class Figures{
         this.type = name;
         if (type.equals("stealthDude")) {
             this.speed = 2;
-            this.strength = 1;
+            this.strength = 3;
             this.range = Game.wallX;
             this.stealth = 9;
             this.positionX = x1;

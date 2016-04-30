@@ -21,10 +21,6 @@ public class Store{
     public static boolean draw=false;
     /**      */
     public Store(){
-        //UI.clearGraphics();
-        UI.repaintGraphics();
-        UI.setMouseListener(this::doMouse);
-        //UI.addButton("Quit", UI::quit);
 
     }
     //drawing the store

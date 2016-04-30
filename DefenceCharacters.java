@@ -47,43 +47,43 @@ public class DefenceCharacters{
     public void draw(){
         SwingUtilities.invokeLater(()->{
         if (type.equals("level1")){
-            UI.drawImage("defenceCharacter.jpg", positionX, positionY, 50, 100);
+            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
         }
         if (type.equals("level2")){
-            UI.drawImage("defenceCharacter.jpg", positionX, positionY, 50, 100);
+            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
         }
         if (type.equals("level3")){
-            UI.drawImage("defenceCharacter.jpg", positionX, positionY, 50, 100);
+            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
         }
         if (type.equals("level4")){
-            UI.drawImage("defenceCharacter.jpg", positionX, positionY, 50, 100);
+            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
         }
         if (type.equals("level5")){
-            UI.drawImage("defenceCharacter.jpg", positionX, positionY, 50, 100);
+            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
         }
         if (type.equals("level6")){
-            UI.drawImage("defenceCharacter.jpg", positionX, positionY, 50, 100);
+            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
         }
     });
     }
     public void erase(){
          if (type.equals("level1")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level2")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level3")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level4")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level5")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level6")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
     }
     
@@ -93,22 +93,22 @@ public class DefenceCharacters{
 
     public void surrender() {
         if (type.equals("level1")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level2")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level3")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level4")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level5")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level6")){
-            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+            UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
     }
 
