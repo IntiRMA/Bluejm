@@ -16,7 +16,7 @@ public class Figures{
     private int speed;
     private double strength;
     private double range;
-    private int stealth;
+    private double stealth;
     private double positionX;
     private double positionY;
     private String type;
@@ -24,6 +24,7 @@ public class Figures{
     private double width;
     public boolean alarm = true;
     private double alarmX = 10;
+    private double stealthRat=0;
     double i=0;
 
     public Figures(String name, double x1, double y1){
@@ -32,7 +33,7 @@ public class Figures{
             this.speed = 2;
             this.strength = 3;
             this.range = Game.wallX;
-            this.stealth = 9;
+            this.stealth = 4;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
@@ -42,7 +43,7 @@ public class Figures{
             this.speed = 1;
             this.strength = 4;
             this.range = Game.wallX;
-            this.stealth = 3;
+            this.stealth = 1;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
@@ -52,7 +53,7 @@ public class Figures{
             this.speed = 1;
             this.strength = 2;
             this.range = Game.ArenaSizex;
-            this.stealth = 5;
+            this.stealth = 2;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
@@ -62,7 +63,7 @@ public class Figures{
             this.speed = 1;
             this.strength = 7;
             this.range = Game.ArenaSizex;
-            this.stealth = 5;
+            this.stealth = 1.5;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
@@ -72,7 +73,7 @@ public class Figures{
             this.speed = 2;
             this.strength = 5;
             this.range = Game.wallX;
-            this.stealth = 9;
+            this.stealth = 4;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
@@ -80,7 +81,7 @@ public class Figures{
         }
         if (type.equals("rangeStealth")) {
             this.speed = 1;
-            this.strength = 2;
+            this.strength = 3;
             this.range = Game.ArenaSizex;;
             this.stealth = 9;
             this.positionX = x1;
@@ -134,7 +135,12 @@ public class Figures{
             UI.eraseImage("rangeStealth.png", positionX, positionY);
         }
     }
-
+    
+    public double stealthRatio(){
+        stealthRat=1/stealth;
+        return stealthRat;
+    }
+    
     public void move() {
         if (this.type.equalsIgnoreCase("stealthDude")){
             if(this.positionX>=80){
@@ -161,6 +167,28 @@ public class Figures{
         else {
             return 0;
         }
+    }
+    
+    public double attackCop() {
+        if (type.equals("rangeDude") || type.equals("strongRange")){
+            return strength;
+        }
+        else {
+            return 0;
+        }
+    }
+    
+    public double hit(){
+        HP-=5;
+        return HP;
+    }
+    
+    public double getX() {
+        return positionX;
+    }
+    
+    public double getY() {
+        return positionY;
     }
 
     public double alarmOFF(double alarmY) {
