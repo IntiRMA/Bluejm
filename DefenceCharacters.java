@@ -46,28 +46,29 @@ public class DefenceCharacters{
 
     public void draw(){
         SwingUtilities.invokeLater(()->{
-        if (type.equals("level1")){
-            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
-        }
-        if (type.equals("level2")){
-            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
-        }
-        if (type.equals("level3")){
-            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
-        }
-        if (type.equals("level4")){
-            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
-        }
-        if (type.equals("level5")){
-            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
-        }
-        if (type.equals("level6")){
-            UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
-        }
-    });
+                if (type.equals("level1")){
+                    UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
+                }
+                if (type.equals("level2")){
+                    UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
+                }
+                if (type.equals("level3")){
+                    UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
+                }
+                if (type.equals("level4")){
+                    UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
+                }
+                if (type.equals("level5")){
+                    UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
+                }
+                if (type.equals("level6")){
+                    UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
+                }
+            });
     }
+
     public void erase(){
-         if (type.equals("level1")){
+        if (type.equals("level1")){
             UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
         if (type.equals("level2")){
@@ -86,9 +87,18 @@ public class DefenceCharacters{
             UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
     }
-    
-    public void attack() {
-        
+
+    public boolean attack(double x,double y,double st){
+        boolean hit=false;
+        if(y<positionY + 10 && y>positionY - 10&& x > positionX){
+            double num = Math.random();
+            if(num<=st){
+                hit=true;
+            }
+        }else{
+            hit=false;
+        }
+        return hit;
     }
 
     public void surrender() {

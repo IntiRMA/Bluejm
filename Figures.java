@@ -143,7 +143,7 @@ public class Figures{
     
     public void move() {
         if (this.type.equalsIgnoreCase("stealthDude")){
-            if(this.positionX>=80){
+            if(this.positionX>=50){
                 this.positionX = positionX - speed;
             }
         }
@@ -179,8 +179,8 @@ public class Figures{
     }
     
     public double hit(){
-        HP-=5;
-        return HP;
+        this.HP-=2;
+        return this.HP;
     }
     
     public double getX() {
