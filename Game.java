@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Game{
     public static final double ArenaSize =600;
+    public static final double wallX =300;
     public static final double ArenaSizex =1000;
     public static final int top =0;
     public static final int left=0;
@@ -238,7 +239,7 @@ public class Game{
         if (this.wallHP == this.wallStartHP/2){
             this.wall=this.wall + "broke";
         }
-        UI.drawImage(this.wall + ".jpg",300,0,20,ArenaSize);
+        UI.drawImage(this.wall + ".jpg",wallX,0,20,ArenaSize);
     }
 
     public static void main(String[] arguments){

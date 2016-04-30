@@ -21,6 +21,7 @@ public class Figures{
     private double positionY;
     private String type;
     private double HP;
+    private double width;
 
     public Figures(String name, double x1, double y1){
         this.type = name;
@@ -32,6 +33,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
+            this.width=71;
         }
         if (type.equals("strongDude")) {
             this.speed = 1;
@@ -41,6 +43,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
+            this.width=118;
         }
         if (type.equals("rangeDude")) {
             this.speed = 1;
@@ -50,25 +53,28 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
+            this.width=51.1;
         }
     }
 
     public void draw(){
         SwingUtilities.invokeLater(()->{
                 if (type.equals("stealthDude")){
-                    UI.drawImage("stealthDude.jpg", positionX, positionY, 71, 100);
+                    UI.drawImage("stealthDude.jpg", positionX, positionY,width, 100);
                 }
                 if (type.equals("strongDude")){
-                    UI.drawImage("strongDude.jpg", positionX, positionY, 118, 100);
+                    UI.drawImage("strongDude.jpg", positionX, positionY,width, 100);
                 }
                 if (type.equals("rangeDude")){
-                    UI.drawImage("rangeDude.jpg", positionX, positionY, 51.1, 100);
+                    UI.drawImage("rangeDude.jpg", positionX, positionY,width, 100);
                 }
             });
     }
 
     public void move() {
-        this.positionX = positionX - speed;
+        if((this.positionX - width/2) > Game.wallX){
+            this.positionX = positionX - speed;
+        }
     }
 
     public double attack() {
