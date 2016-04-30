@@ -15,47 +15,62 @@ public class Store{
     public int numStrongStealth;
     public int numStrongRange;
     public int numStealthRange;
+    public int numStrongStealthRange;
     public int Cash=5000;
+    int top =50;
     public boolean draw=false;
     /**      */
     public Store(){
-        //UI.initialise();
+        UI.initialise();
         //UI.addButton("Quit", UI::quit);
 
-       
     }
     //drawing the store
     public void drawStore(){
         int height=120;
         int width=100;
-        
+
         UI.setMouseListener(this::doMouse);
         UI.clearGraphics();
         UI.setColor(Color.black);
-        UI.fillRect(0,0,700,700);
+        UI.fillRect(0,0,700,700+top);
         UI.setColor(Color.blue);
         UI.setFontSize(50);
-        UI.drawString("Heist",300, 20);
-        UI.drawRect(50,50,width,120);
-        UI.drawRect(50,200,width,height);
-        UI.drawRect(250,50,width,height);
-        UI.drawRect(250,200,width,height);
-        UI.drawRect(400,50,width,height);
-        UI.drawRect(400,200,width,height);
-        UI.drawRect(250,350,width,height);
-        UI.fillRect(50, 500, 100,50);
+        UI.drawString("Store",300, 20+top);
         UI.setFontSize(20);
+        UI.drawRect(50,50+top,width,120);
+         UI.drawString("Octavio",50, 50+top+130);
+        UI.drawRect(50,200+top,width,height);
+        UI.drawString("Octavio",50, 200+top+130);
+        UI.drawRect(250,50+top,width,height);
+        UI.drawString("Octavio",250, 50+top+130);
+        UI.drawRect(250,200+top,width,height);
+        UI.drawString("Octavio",250, 200+top+130);
+        UI.drawRect(400,50+top,width,height);
+        UI.drawString("Octavio",400, 50+top+130);
+        UI.drawRect(400,200+top,width,height);
+        UI.drawString("Octavio",400, 200+top+130);
+        UI.drawRect(250,350+top,width,height);
+        UI.drawString("Octavio",400, 350+top+130);
+        UI.fillRect(50, 500+top, 100,50);
         
-        UI.drawString("Cash: $"+Cash, 600, 50);
-        UI.drawString("stealth: "+numStealth,600,100);
-        UI.drawString("strong: "+numStrong,600,150);
-        UI.drawString("StrongRange: "+numStrongRange,600,250);
-        UI.drawString("StealthRange: "+numStealthRange,600,300);
-        UI.drawString("StrongStealth: "+numStrongStealth,600,350);
-        UI.drawString("range: "+numRange,600,200);
+        UI.setColor(Color.white);
+        
+        UI.setFontSize(20);
+        UI.drawString("Play!",75,500+top+25);
+        UI.setColor(Color.blue);
+
+        UI.drawString("Cash: $"+Cash, 520, 50);
+        UI.drawString("stealth: "+numStealth,520,100);
+        UI.drawString("strong: "+numStrong,520,150);
+        UI.drawString("StrongRange: "+numStrongRange,520,250);
+        UI.drawString("StealthRange: "+numStealthRange,520,300);
+        UI.drawString("StrongStealth: "+numStrongStealth,520,350);
+        UI.drawString("range: "+numRange,520,200);
         UI.sleep(40);
 
     }
+
     public void doMouse(String action, double x, double y){
         double xClick=0;
         double yClick=0;
@@ -64,48 +79,50 @@ public class Store{
             yClick=y;
 
         }
-        if(xClick>50 && xClick<150 && yClick>50 && yClick<50+120 && Cash>49){
+        if(xClick>50 && xClick<150 && yClick>50+top && yClick<50+120+top && Cash>49){
             //stealth
             numStealth=numStealth+1;
             Cash=Cash-50;
 
-        }else if(xClick>50 && xClick<150 && yClick>200 && yClick<200+120 && Cash>499 && numStealth>0&& numRange>0){
+        }else if(xClick>50 && xClick<150 && yClick>200 +top && yClick<200+120+top && Cash>499 && numStealth>0&& numRange>0){
             //stealth&&range
             numStealthRange=numStealthRange+1;
             Cash=Cash-500;
             numRange=numRange-1;
             numStealth=numStealth-1;
 
-        }else if(xClick>250 && xClick<350 && yClick>50 && yClick<50+120 && Cash>49){
+        }else if(xClick>250 && xClick<350 && yClick>50+top && yClick<50+120+top && Cash>49){
             //strong
             numStrong=numStrong+1;
             Cash=Cash-50;
 
-        }else if(xClick>250 && xClick<350 && yClick>200 && yClick<200+120 &&Cash>800 &&numStrong>0 && numStealth>0){
+        }else if(xClick>250 && xClick<350 && yClick>200+top && yClick<200+120+top &&Cash>800 &&numStrong>0 && numStealth>0){
             //Strong+Stealth
             numStrongStealth=numStrongStealth+1;
             Cash=Cash-800;
             numStrong=numStrong-1;
             numStealth=numStealth-1;
 
-        }else if(xClick>400 && xClick<500 && yClick>50 && yClick<50+120&& Cash>49){
+        }else if(xClick>400 && xClick<500 && yClick>50+top && yClick<50+120+top && Cash>49){
             //Range
             numRange=numRange+1;
             Cash=Cash-50;
-        }else if(xClick>400 && xClick<550 && yClick>200 && yClick<200+120 && Cash>1199 &&numStrong>0 && numRange>0){
+        }else if(xClick>400 && xClick<550 && yClick>200+top && yClick<200+120+top && Cash>1199 &&numStrong>0 && numRange>0){
             //Strong and range
             numStrongRange=numStrongRange+1;
             Cash=Cash-1200;
             numStrong=numStrong-1;
             numRange=numRange+1;
-            
+
         }
-        else if(xClick>250 && xClick<350 && yClick>350 && yClick<350+120){
+        else if(xClick>250 && xClick<350 && yClick>350+top && yClick<350+120+top&& Cash>3000 && numStrong>0 &&numStealth>0 &&numRange>0){
+            numStrongStealthRange=numStrongStealthRange+1;
+
            
-        }else if(xClick>50 && xClick<150 && yClick>500 && yClick<550){
+        }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top){
             draw= true;
         }
-       
+
     }
 
     public boolean bool(){
@@ -122,6 +139,18 @@ public class Store{
 
     public int stealth(){
         return numStealth;
+    }
+    public int stealthRange(){
+        return numStealthRange;
+    }
+    public int strongStealth(){
+        return numStrongStealth;
+    }
+    public int strongRange(){
+        return numStrongRange;
+    }
+    public int strongStealthRange(){
+        return numStrongStealthRange;
     }
 
     /*public static void main(String[] args){
