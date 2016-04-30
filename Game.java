@@ -202,11 +202,37 @@ public class Game{
             for(int k=0;k<numberRange;k++){
                 if(range[k]!=null){
                     range[k].move();
-                    //                     if(time3 - timegun>=500){
-                    //                         wallHP-=range[k].attack();
-                    //                         
-                    //                     }
+
                     range[k].draw();
+
+                }
+            }
+
+            for(int k=0;k<numberRange;k++){
+                if(range[k]!=null){
+                    range[k].move();
+                    if(time3 - timegun>=500){
+                        timegun = time3;
+                        double damage = range[k].attackCop();
+                        double HP=1;
+                        for(int a=0;a<numCops;a++){
+                            if(cops[a]!=null){
+                                if((range[k].getY())>(cops[a].getY()+10)&&(range[k].getY())>(cops[a].getY()-10)){
+                                    HP = cops[a].shot(damage);
+
+                                }
+                                if(HP<=0){
+                                    cops[a].erase();
+                                    cops[a]=null;
+                                    if(ALARM ==false){
+                                        numCops--;
+                                    }
+                                    UI.sleep(40);
+                                }
+                            }
+
+                        }
+                    }
                 }
             }
             ninj=Calendar.getInstance();
@@ -259,7 +285,7 @@ public class Game{
                                 double HP =1;
                                 if(hit){
                                     HP = strong[i].hit();
-                                    UI.println("HP FAT " + HP);
+
                                 }
                                 if (HP<=0){
                                     strong[i].erase();
@@ -275,7 +301,7 @@ public class Game{
                                 double HP =1;
                                 if(hit){
                                     HP = range[k].hit();
-                                    UI.println("HP RANGE " + HP);
+
                                 }
                                 if (HP<=0){
                                     range[k].erase();
@@ -291,7 +317,7 @@ public class Game{
                                 double HP =1;
                                 if(hit){
                                     HP = stealth[z].hit();
-                                    UI.println("HP NINJA" + HP);
+
                                 }
                                 if (HP<=0){
                                     stealth[z].erase();
@@ -384,19 +410,7 @@ public class Game{
     }
 
     public void alarm() {
-        double alarmPosition = Math.random();
-        if (alarmPosition > 0 && alarmPosition < 0.25){
-            alarmy = 0;
-        }
-        else if (alarmPosition > 0.25 && alarmPosition < 0.5) {
-            alarmy = 100;
-        }
-        else if (alarmPosition > 0.5 && alarmPosition < 0.75) {
-            alarmy = 200;
-        }
-        else if (alarmPosition > 0.75 && alarmPosition < 1) {
-            alarmy = 300;
-        }
+        alarmy = 300;
         ALARM = true;
     }
 

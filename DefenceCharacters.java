@@ -88,6 +88,10 @@ public class DefenceCharacters{
         }
     }
 
+    public double getY(){
+        return positionY;
+    }
+
     public boolean attack(double x,double y,double st){
         boolean hit=false;
         if(y<positionY + 10 && y>positionY - 10&& x > positionX){
@@ -99,6 +103,10 @@ public class DefenceCharacters{
             hit=false;
         }
         return hit;
+    }
+    public double shot(double sht){
+        HP-=sht;
+        return HP;
     }
 
     public void surrender() {

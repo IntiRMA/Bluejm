@@ -159,12 +159,8 @@ public class Store{
     }
 
     private void playSound() {
-        try
-        {
-            // get the sound file as a resource out of my jar file;
-            // the sound file must be in the same directory as this class file.
-            // the input stream portion of this recipe comes from a javaworld.com article.
-            InputStream inputStream = getClass().getResourceAsStream("ding.mp3");
+        try{
+            InputStream inputStream = getClass().getResourceAsStream("ding.wav");
             AudioStream audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
         }
