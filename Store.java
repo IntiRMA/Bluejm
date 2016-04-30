@@ -43,16 +43,16 @@ public class Store{
          UI.drawString("Octavio",50, 60+top+130);
         UI.drawRect(50,200+top,width,height);
         UI.drawString("Dan",50, 210+top+130);
-        UI.drawRect(250,50+top,width,height);
-        UI.drawString("Inti",250, 60+top+130);
-        UI.drawRect(250,200+top,width,height);
-        UI.drawString("Sloth",250, 210+top+130);
+        UI.drawRect(225,50+top,width,height);
+        UI.drawString("Inti",225, 60+top+130);
+        UI.drawRect(225,200+top,width,height);
+        UI.drawString("Sloth",225, 210+top+130);
         UI.drawRect(400,50+top,width,height);
         UI.drawString("Scylar",400, 60+top+130);
         UI.drawRect(400,200+top,width,height);
         UI.drawString("Tyaan",400, 210+top+130);
-        UI.drawRect(250,350+top,width,height);
-        UI.drawString("Alexander The Great",250, 360+top+130);
+        UI.drawRect(225,350+top,width,height);
+        UI.drawString("Alexander The Great",225, 360+top+130);
         UI.fillRect(50, 500+top, 100,50);
         
         UI.setColor(Color.white);
