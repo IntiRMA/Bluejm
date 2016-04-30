@@ -66,8 +66,8 @@ public class DefenceCharacters{
     });
     }
     
-    public void attack() {
-        
+    public double attack() {
+        return damage;
     }
 
     public void surrender() {

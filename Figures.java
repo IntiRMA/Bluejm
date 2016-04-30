@@ -28,7 +28,7 @@ public class Figures{
         if (type.equals("stealthDude")) {
             this.speed = 2;
             this.strength = 1;
-            this.range = 80;
+            this.range = Game.wallX;
             this.stealth = 9;
             this.positionX = x1;
             this.positionY = y1;
@@ -38,7 +38,7 @@ public class Figures{
         if (type.equals("strongDude")) {
             this.speed = 1;
             this.strength = 4;
-            this.range = 80;
+            this.range = Game.wallX;
             this.stealth = 3;
             this.positionX = x1;
             this.positionY = y1;
@@ -68,7 +68,7 @@ public class Figures{
         if (type.equals("stealthStrong")) {
             this.speed = 2;
             this.strength = 5;
-            this.range = 80;
+            this.range = Game.wallX;
             this.stealth = 9;
             this.positionX = x1;
             this.positionY = y1;
