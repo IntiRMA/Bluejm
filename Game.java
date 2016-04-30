@@ -16,6 +16,7 @@ public class Game{
     private double wallHP;
     private double wallStartHP;
     public double alarmHP;
+    public double alarmStartHP;
     private String wall = "level";
     private int level=1;
     private String type = "strong";
@@ -130,10 +131,12 @@ public class Game{
             this.wallHP=100;
             this.wallStartHP=100;
             this.alarmHP=100;
+            this.alarmStartHP =100;
         }else{
             this.wallHP=100*level;
             this.wallStartHP=100*level;
             this.alarmHP=100*level;
+            this.alarmStartHP=100*level;
         }
         UI.setMouseListener(this::mouse);
         UI.setKeyListener(this::controls);
@@ -236,55 +239,71 @@ public class Game{
                 defy=90;
                 defx=430;
             }
+
+            for(int a=0;a<numCops;a++){
+                if(cops[a]!=null){
+                    cops[a].draw();
+                }
+            }
             //cops attack
             cal = Calendar.getInstance();
             long time5 = cal.getTimeInMillis();
             if(time5 - timecop >= 250){
                 timecop=time5;
+
                 for(int a=0;a<numCops;a++){
                     if(cops[a]!=null){
-                        cops[a].draw();
                         for(int i=0;i<numberStrong;i++){
-                            boolean hit = cops[a].attack(strong[i].getX(),strong[i].getY(),strong[i].getStealth());
-                            double HP =1;
-                            if(hit){
-                                HP = strong[i].hit();
-                            }
-                            if (HP<=0){
-                                strong[i].erase();
-                                strong[i]=null;
-                                numberStrong--;
+                            if(strong[i]!=null){
+                                boolean hit = cops[a].attack(strong[i].getX(),strong[i].getY(),strong[i].stealthRatio());
+                                double HP =1;
+                                if(hit){
+                                    HP = strong[i].hit();
+                                    UI.println("HP FAT " + HP);
+                                }
+                                if (HP<=0){
+                                    strong[i].erase();
+                                    strong[i]=null;
+                                    numberStrong--;
+                                }
                             }
                         }
 
                         for(int k=0;k<numberRange;k++){
-                            boolean hit = cops[a].attack(range[k].getX(),range[k].getY(),range[k].getStealth());
-                            double HP =1;
-                            if(hit){
-                                HP = range[k].hit();
-                            }
-                            if (HP<=0){
-                                range[k].erase();
-                                range[k]=null;
-                                numberRange--;
+                            if(range[k]!=null){
+                                boolean hit = cops[a].attack(range[k].getX(),range[k].getY(),range[k].stealthRatio());
+                                double HP =1;
+                                if(hit){
+                                    HP = range[k].hit();
+                                    UI.println("HP RANGE " + HP);
+                                }
+                                if (HP<=0){
+                                    range[k].erase();
+                                    range[k]=null;
+                                    numberRange--;
+                                }
                             }
                         }
 
                         for(int z=0;z<numberStealth;z++){
-                            boolean hit = cops[a].attack(stealth[z].getX(),stealth[z].getY(),stealth[z].getStealth());
-                            double HP =1;
-                            if(hit){
-                                HP = stealth[z].hit();
-                            }
-                            if (HP<=0){
-                                stealth[z].erase();
-                                stealth[z]=null;
-                                numberStealth--;
+                            if(stealth[z]!=null){
+                                boolean hit = cops[a].attack(stealth[z].getX(),stealth[z].getY(),stealth[z].stealthRatio());
+                                double HP =1;
+                                if(hit){
+                                    HP = stealth[z].hit();
+                                    UI.println("HP NINJA" + HP);
+                                }
+                                if (HP<=0){
+                                    stealth[z].erase();
+                                    stealth[z]=null;
+                                    numberStealth--;
+                                }
                             }
                         }
                     }
                 }
             }
+
             D=true;
             if((this.numberStrong==0 && this.numberStealth==0 && this.numberRange==0)&& this.wallHP!=0){
                 lose();
@@ -295,9 +314,10 @@ public class Game{
                 break;
             }
             UI.sleep(40);
-        }
-        if(lv){
-            nextLevel();
+
+            if(lv){
+                nextLevel();
+            }
         }
     }
 
@@ -436,7 +456,7 @@ public class Game{
                 UI.drawRect(ArenaSizex+9,59,51,16);
                 UI.setColor(Color.red.brighter());
                 UI.fillRect(ArenaSizex+10,60,alarmHP/(2*level),15);
-                if(this.alarmHP<10&&this.alarmHP!=0){
+                if(this.alarmHP<this.alarmStartHP&&this.alarmHP!=0){
                     this.stat="disabling";
                 }
                 if(this.alarmHP<=0){
