@@ -23,8 +23,8 @@ public class Game{
     private String action="";
     private long currentTime;
     private long time;
-    private double defx =250;
-    private double defy =0;
+    private double defx =430;
+    private double defy =90;
     private int rangeLeft=0;
     private int strongLeft=0;
     private int stealthLeft=0;
@@ -53,14 +53,14 @@ public class Game{
                 this.position=0;
             }
         }
-        if(this.position<100){
-            this.position=1;
-        }else if(this.position<200){
-            this.position=100;
-        }else if(this.position<300){
-            this.position=200;
-        }else if(this.position<400){
-            this.position=300;
+        if(this.position<162){
+            this.position=90;
+        }else if(this.position<234){
+            this.position=162;
+        }else if(this.position<306){
+            this.position=234;
+        }else {
+            this.position=306;
         }
         this.action = ev;
     }
@@ -122,7 +122,7 @@ public class Game{
         int rg= 0;
         int stl = 0;
         int c = 0;
-        numCops=0;
+        numCops=4;
         boolean D=false;
         boolean lv =false;
         alarm();
@@ -139,8 +139,13 @@ public class Game{
         UI.setKeyListener(this::controls);
         Calendar cal = Calendar.getInstance();
         Calendar calen = Calendar.getInstance();
+        Calendar ninj = Calendar.getInstance();
+        Calendar gun = Calendar.getInstance();
+
         time = calen.getTimeInMillis();
-        this.currentTime = cal.getTimeInMillis();
+        long timeninj = ninj.getTimeInMillis();
+        long timegun = gun.getTimeInMillis();
+
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0)&& this.wallHP!=0){
             UI.setKeyListener(this::controls);
             if(D){
@@ -188,25 +193,25 @@ public class Game{
                     strong[i].draw();
                 }
             }
-            calen=Calendar.getInstance();
-            long time3 = calen.getTimeInMillis();
+            gun=Calendar.getInstance();
+            long time3 = gun.getTimeInMillis();
             for(int k=0;k<numberRange;k++){
                 if(range[k]!=null){
                     range[k].move();
-                    //                     if(time2 - time>=500){
+                    //                     if(time3 - timegun>=500){
                     //                         wallHP-=range[k].attack();
                     //                         
                     //                     }
                     range[k].draw();
                 }
             }
-            calen=Calendar.getInstance();
-            long time4 = calen.getTimeInMillis();
+            ninj=Calendar.getInstance();
+            long time4 = ninj.getTimeInMillis();
             for(int z=0;z<numberStealth;z++){
                 if(stealth[z]!=null){
                     stealth[z].move();
-                    if(time4 - time>=500){
-                        time=time4;
+                    if(time4 - timeninj>=500){
+                        timeninj=time4;
                         alarmHP-=stealth[z].alarmOFF(alarmy);
                         if(alarmHP<=0){
                             ALARM=false;
@@ -216,22 +221,19 @@ public class Game{
                 }
             }
             cal = Calendar.getInstance();
-            if(((D==false )|| (cal.getTimeInMillis() - this.currentTime)>= 5000) && c<100 && ALARM){
-                cops[c] = new DefenceCharacters (("level" + Integer.toString(level)),this.defx,this.defy);
-                c++;
-                this.defy+=100;
-                if(this.defy>=ArenaSize){
-                    this.defy=0;
-                    this.defx-=50;
-                    if(this.defx<=0){
-                        this.defx=250;
+            if(ALARM){
+                for(int a=0;a<numCops;a++){
+                    if(cops[a]==null){
+                        cops[a] = new DefenceCharacters (("level" + Integer.toString(level)),this.defx,this.defy);
+
                     }
+                    defy+=75;
+                    defx-=50;
                 }
-                numCops++;
-                if(D){
-                    this.currentTime = cal.getTimeInMillis();
-                }
+                defy=90;
+                defx=430;
             }
+
             for(int a=0;a<numCops;a++){
                 if(cops[a]!=null){
                     cops[a].draw();
