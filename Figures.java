@@ -128,39 +128,20 @@ public class Figures{
         }
     }
 
-    public void alarm() {
-        if (alarm){
-            double alarmPosition = Math.random();
-            if (alarmPosition > 0 && alarmPosition < 0.25){
-                alarmY = 0;
-            }
-            else if (alarmPosition > 0.25 && alarmPosition < 0.5) {
-                alarmY = 100;
-            }
-            else if (alarmPosition > 0.5 && alarmPosition < 0.75) {
-                alarmY = 200;
-            }
-            else if (alarmPosition > 0.75 && alarmPosition < 1) {
-                alarmY = 300;
-            }
-            UI.setColor(Color.red);
-            UI.fillOval(alarmX, alarmY, 50, 50);
-            UI.setColor(Color.black);
+    public boolean alarmOFF() {
+        if (positionX > alarmX && positionX < alarmX+50) {
+            alarm = false;
+            UI.eraseOval(10, 0, 50, 50);
+            UI.eraseOval(10, 100, 50, 50);
+            UI.eraseOval(10, 200, 50, 50);
+            UI.eraseOval(10, 300, 50, 50);
+        }else{
+            alarm=true;
         }
+        return alarm;
+
     }
 
-    public void alarmOFF() {
-        if (type.equals("stealthDude")){
-            if (positionX > alarmX && positionX < alarmX+50) {
-                alarm = false;
-                UI.eraseOval(10, 0, 50, 50);
-                UI.eraseOval(10, 100, 50, 50);
-                UI.eraseOval(10, 200, 50, 50);
-                UI.eraseOval(10, 300, 50, 50);
-            }
-        }
-    }
-    
     public void die() {
         if (type.equals("stealthDude")){
             UI.eraseImage("stealthDude.png", positionX, positionY);
