@@ -17,7 +17,7 @@ public class DefenceCharacters{
     private double positionY;
     private String type;
     private double damage;
-    private double HP = 100;
+    private double HP = 101;
 
     public DefenceCharacters(String name, double x2, double y2 ){
         this.type = name;
