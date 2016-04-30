@@ -95,12 +95,24 @@ public class Figures{
         SwingUtilities.invokeLater(()->{
                 if (type.equals("stealthDude")){
                     UI.drawImage("stealthDude.png", positionX, positionY,width, 90);
+                    UI.drawRect(positionX, positionY-5, width, 5);
+                    UI.setColor(Color.red);
+                    UI.fillRect(positionX+1, positionY-4, (width/100)*HP, 4);
+                    UI.setColor(Color.black);
                 }
                 if (type.equals("strongDude")){
                     UI.drawImage("strongDude.png", positionX, positionY,width, 90);
+                    UI.drawRect(positionX, positionY-5, width, 5);
+                    UI.setColor(Color.red);
+                    UI.fillRect(positionX+1, positionY-4, (width/100)*HP, 4);
+                    UI.setColor(Color.black);
                 }
                 if (type.equals("rangeDude")){
                     UI.drawImage("rangeDude.png", positionX, positionY,width, 90);
+                    UI.drawRect(positionX, positionY-5, width, 5);
+                    UI.setColor(Color.red);
+                    UI.fillRect(positionX+1, positionY-4, (width/100)*HP, 4);
+                    UI.setColor(Color.black);
                 }
                 if (type.equals("strongRange")){
                     UI.drawImage("strongRange.png", positionX, positionY,width, 90);
@@ -135,12 +147,12 @@ public class Figures{
             UI.eraseImage("rangeStealth.png", positionX, positionY);
         }
     }
-    
+
     public double stealthRatio(){
         stealthRat=1/stealth;
         return stealthRat;
     }
-    
+
     public void move() {
         if (this.type.equalsIgnoreCase("stealthDude")){
             if(this.positionX>=50){
@@ -168,7 +180,7 @@ public class Figures{
             return 0;
         }
     }
-    
+
     public double attackCop() {
         if (type.equals("rangeDude") || type.equals("strongRange")){
             return strength;
@@ -177,16 +189,16 @@ public class Figures{
             return 0;
         }
     }
-    
+
     public double hit(){
         this.HP-=2;
         return this.HP;
     }
-    
+
     public double getX() {
         return positionX;
     }
-    
+
     public double getY() {
         return positionY;
     }
