@@ -15,6 +15,7 @@ public class Game{
     private int numberRange;
     private double wallHP;
     private double wallStartHP;
+    public double alarmHP;
     private String wall = "wall";
     private int level=1;
     private String type = "strong";
@@ -127,6 +128,7 @@ public class Game{
         if(level==1){
             wallHP=100;
             wallStartHP=100;
+            alarmHP=10;
         }
         UI.setMouseListener(this::mouse);
         UI.setKeyListener(this::controls);
@@ -192,7 +194,10 @@ public class Game{
                     stealth[z].move();
                     if(time2 - time>=500){
                         time=time2;
-                        ALARM = stealth[z].alarmOFF();
+                        alarmHP-=stealth[z].alarmOFF(alarmy);
+                        if(alarmHP<=0){
+                            ALARM=false;
+                        }
                     }
 
                     stealth[z].draw();
@@ -279,6 +284,7 @@ public class Game{
         ALARM = true;
 
     }
+
     public void won(){
         UI.drawString("YOU WIN!!!",200,350);
         UI.sleep(1000);
@@ -325,10 +331,20 @@ public class Game{
                 UI.drawRect(ArenaSizex+9,19,51,16);
                 UI.setColor(Color.green.brighter());
                 UI.fillRect(ArenaSizex+10,20,wallHP/2,15);
-
-                UI.setColor(Color.red);
-                UI.fillOval(10, alarmy, 50, 50);
+                
+                UI.setColor(Color.green.brighter());
+                UI.drawString("ALARM HP",ArenaSizex+9,30);
                 UI.setColor(Color.black);
+                UI.setLineWidth(1);
+                UI.drawRect(ArenaSizex+9,39,51,16);
+                UI.setColor(Color.red.brighter());
+                UI.fillRect(ArenaSizex+10,40,alarmHP/2,15);
+                
+                if(ALARM){
+                    UI.setColor(Color.red);
+                    UI.fillOval(10, alarmy, 50, 50);
+                    UI.setColor(Color.black);
+                }
 
                 UI.repaintAllGraphics();
             });
