@@ -22,6 +22,9 @@ public class Figures{
     private String type;
     private double HP;
     private double width;
+    public boolean alarm = true;
+    private double alarmX = 10;
+    private double alarmY = 0;
 
     public Figures(String name, double x1, double y1){
         this.type = name;
@@ -125,6 +128,39 @@ public class Figures{
         }
     }
 
+    public void alarm() {
+        if (alarm){
+            double alarmPosition = Math.random();
+            if (alarmPosition > 0 && alarmPosition < 0.25){
+                alarmY = 0;
+            }
+            else if (alarmPosition > 0.25 && alarmPosition < 0.5) {
+                alarmY = 100;
+            }
+            else if (alarmPosition > 0.5 && alarmPosition < 0.75) {
+                alarmY = 200;
+            }
+            else if (alarmPosition > 0.75 && alarmPosition < 1) {
+                alarmY = 300;
+            }
+            UI.setColor(Color.red);
+            UI.fillOval(alarmX, alarmY, 50, 50);
+            UI.setColor(Color.black);
+        }
+    }
+
+    public void alarmOFF() {
+        if (type.equals("stealthDude")){
+            if (positionX > alarmX && positionX < alarmX+50) {
+                alarm = false;
+                UI.eraseOval(10, 0, 50, 50);
+                UI.eraseOval(10, 100, 50, 50);
+                UI.eraseOval(10, 200, 50, 50);
+                UI.eraseOval(10, 300, 50, 50);
+            }
+        }
+    }
+    
     public void die() {
         if (type.equals("stealthDude")){
             UI.eraseImage("stealthDude.png", positionX, positionY);
