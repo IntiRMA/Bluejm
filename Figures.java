@@ -24,7 +24,6 @@ public class Figures{
     private double width;
     public boolean alarm = true;
     private double alarmX = 10;
-    private double alarmY = 0;
 
     public Figures(String name, double x1, double y1){
         this.type = name;
@@ -128,18 +127,19 @@ public class Figures{
         }
     }
 
-    public boolean alarmOFF() {
-        if (positionX > alarmX && positionX < alarmX+50) {
-            alarm = false;
-            UI.eraseOval(10, 0, 50, 50);
-            UI.eraseOval(10, 100, 50, 50);
-            UI.eraseOval(10, 200, 50, 50);
-            UI.eraseOval(10, 300, 50, 50);
-        }else{
-            alarm=true;
+    public boolean alarmOFF(double alarmY) {
+        if (type.equals("stealthDude") || type.equals("stealthStrong")) {
+            if (positionX > alarmX && positionX < alarmX+50 && positionY > alarmY && positionY < alarmY+50) {
+                UI.eraseOval(10, 0, 50, 50);
+                UI.eraseOval(10, 100, 50, 50);
+                UI.eraseOval(10, 200, 50, 50);
+                UI.eraseOval(10, 300, 50, 50);
+            }
+            else{
+                alarm=true;
+            }
+            return strength;
         }
-        return alarm;
-
     }
 
     public void die() {
