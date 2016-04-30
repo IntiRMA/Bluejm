@@ -173,7 +173,7 @@ public class Figures{
     }
 
     public double attack() {
-        if ((this.positionX < range + 10)) {
+        if ((this.positionX < 480)) {
             return strength;
         }
         else {
