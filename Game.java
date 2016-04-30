@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Game{
     public static final double ArenaSize =400;
     public static final double wallX =300;
-    public static final double ArenaSizex =1000;
+    public static final double ArenaSizex =900;
     public static final int top =0;
     public static final int left=0;
     private int numberStrong;
@@ -27,6 +27,8 @@ public class Game{
     private int rangeLeft=0;
     private int strongLeft=0;
     private int stealthLeft=0;
+    private int alarmy;
+    private boolean ALARM;
 
     Figures[] strong = new Figures[100];
     Figures[] stealth = new Figures[100];
@@ -121,6 +123,7 @@ public class Game{
         int numCops=0;
         boolean D=false;
         boolean lv =false;
+        alarm();
         if(level==1){
             wallHP=100;
             wallStartHP=100;
@@ -189,14 +192,14 @@ public class Game{
                     stealth[z].move();
                     if(time2 - time>=500){
                         time=time2;
-                        stealth[z].attack();
+                        ALARM = stealth[z].alarmOFF();
                     }
 
                     stealth[z].draw();
                 }
             }
             cal = Calendar.getInstance();
-            if(((D==false )|| (cal.getTimeInMillis() - this.currentTime)>= 5000) && c<100){
+            if(((D==false )|| (cal.getTimeInMillis() - this.currentTime)>= 5000) && c<100 && ALARM){
 
                 cops[c] = new DefenceCharacters (("level" + Integer.toString(level)),this.defx,this.defy);
                 c++;
@@ -258,6 +261,24 @@ public class Game{
         }
     }
 
+    public void alarm() {
+
+        double alarmPosition = Math.random();
+        if (alarmPosition > 0 && alarmPosition < 0.25){
+            alarmy = 0;
+        }
+        else if (alarmPosition > 0.25 && alarmPosition < 0.5) {
+            alarmy = 100;
+        }
+        else if (alarmPosition > 0.5 && alarmPosition < 0.75) {
+            alarmy = 200;
+        }
+        else if (alarmPosition > 0.75 && alarmPosition < 1) {
+            alarmy = 300;
+        }
+        ALARM = true;
+
+    }
     public void won(){
         UI.drawString("YOU WIN!!!",200,350);
         UI.sleep(1000);
@@ -296,6 +317,18 @@ public class Game{
                 UI.drawImage("rangeDude.png",450,ArenaSize + 40,50,100);
                 UI.setColor(Color.red.brighter());
                 UI.drawString(( Integer.toString(this.rangeLeft) + "X"),470,ArenaSize + 160);
+
+                UI.setColor(Color.red.brighter());
+                UI.drawString("WALL HP",ArenaSizex+9,12);
+                UI.setColor(Color.black);
+                UI.setLineWidth(1);
+                UI.drawRect(ArenaSizex+9,19,51,16);
+                UI.setColor(Color.green.brighter());
+                UI.fillRect(ArenaSizex+10,20,wallHP/2,15);
+
+                UI.setColor(Color.red);
+                UI.fillOval(10, alarmy, 50, 50);
+                UI.setColor(Color.black);
 
                 UI.repaintAllGraphics();
             });
