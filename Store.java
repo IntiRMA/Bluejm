@@ -39,19 +39,19 @@ public class Store{
         UI.drawString("Store",300, 20+top);
         UI.setFontSize(20);
         UI.drawRect(50,50+top,width,120);
-         UI.drawString("Octavio",50, 50+top+130);
+         UI.drawString("Octavio",50, 60+top+130);
         UI.drawRect(50,200+top,width,height);
-        UI.drawString("Octavio",50, 200+top+130);
+        UI.drawString("Dan",50, 210+top+130);
         UI.drawRect(250,50+top,width,height);
-        UI.drawString("Octavio",250, 50+top+130);
+        UI.drawString("Inti",250, 60+top+130);
         UI.drawRect(250,200+top,width,height);
-        UI.drawString("Octavio",250, 200+top+130);
+        UI.drawString("Sloth",250, 210+top+130);
         UI.drawRect(400,50+top,width,height);
-        UI.drawString("Octavio",400, 50+top+130);
+        UI.drawString("Scylar",400, 60+top+130);
         UI.drawRect(400,200+top,width,height);
-        UI.drawString("Octavio",400, 200+top+130);
+        UI.drawString("Tyaan",400, 210+top+130);
         UI.drawRect(250,350+top,width,height);
-        UI.drawString("Octavio",400, 350+top+130);
+        UI.drawString("Alexander The Great",250, 360+top+130);
         UI.fillRect(50, 500+top, 100,50);
         
         UI.setColor(Color.white);
