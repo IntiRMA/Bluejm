@@ -149,6 +149,9 @@ public class Game{
         long timeninj = ninj.getTimeInMillis();
         long timegun = gun.getTimeInMillis();
         long timecop = timegun;
+        int loopStrong = this.numberStrong;
+        int loopStealth = this.numberStealth;
+        int loopRange = this.numberRange;
 
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0)&& this.wallHP!=0){
             UI.setKeyListener(this::controls);
@@ -156,7 +159,7 @@ public class Game{
                 draw();
             }
             if(action.equalsIgnoreCase("pressed") && this.type.equals("strong")){
-                if(st<numberStrong && (position>0 && position<ArenaSize)){
+                if(st<loopStrong && (position>0 && position<ArenaSize)){
                     if(strong[st]==null){
                         strong[st] = new Figures("strongDude",ArenaSizex-100,this.position);
                         st++;
@@ -166,7 +169,7 @@ public class Game{
                 }
             }
             if(action.equalsIgnoreCase("pressed") && this.type.equals("range")){
-                if(rg<numberRange && (position>0 && position<ArenaSize)){
+                if(rg<loopRange && (position>0 && position<ArenaSize)){
                     if(range[rg]==null){
                         range[rg] = new Figures("rangeDude",ArenaSizex-100,this.position);
                         rg++;
@@ -176,7 +179,7 @@ public class Game{
                 }
             }
             if(action.equalsIgnoreCase("pressed") && this.type.equals("stealth")){
-                if(stl<numberStealth && (position>0 && position<ArenaSize)){
+                if(stl<loopStealth && (position>0 && position<ArenaSize)){
                     if(stealth[stl]==null){
                         stealth[stl] = new Figures("stealthDude",ArenaSizex-100,this.position);
                         stl++;
@@ -187,7 +190,7 @@ public class Game{
             }
             calen=Calendar.getInstance();
             long time2 = calen.getTimeInMillis();
-            for(int i=0;i<numberStrong;i++){
+            for(int i=0;i<loopStrong;i++){
                 if(strong[i]!=null){
                     strong[i].move();
                     if(time2 - time>=500){
@@ -199,16 +202,14 @@ public class Game{
             }
             gun=Calendar.getInstance();
             long time3 = gun.getTimeInMillis();
-            for(int k=0;k<numberRange;k++){
+            for(int k=0;k<loopRange;k++){
                 if(range[k]!=null){
                     range[k].move();
-
                     range[k].draw();
-
                 }
             }
 
-            for(int k=0;k<numberRange;k++){
+            for(int k=0;k<loopRange;k++){
                 if(range[k]!=null){
                     range[k].move();
                     if(time3 - timegun>=500){
@@ -217,16 +218,13 @@ public class Game{
                         double HP=1;
                         for(int a=0;a<numCops;a++){
                             if(cops[a]!=null){
-                                if((range[k].getY())>(cops[a].getY()+10)&&(range[k].getY())>(cops[a].getY()-10)){
+                                if((range[k].getY())<(cops[a].getY()+10)&&(range[k].getY())>(cops[a].getY()-10)){
                                     HP = cops[a].shot(damage);
 
                                 }
                                 if(HP<=0){
                                     cops[a].erase();
                                     cops[a]=null;
-                                    if(ALARM ==false){
-                                        numCops--;
-                                    }
                                     UI.sleep(40);
                                 }
                             }
@@ -237,7 +235,7 @@ public class Game{
             }
             ninj=Calendar.getInstance();
             long time4 = ninj.getTimeInMillis();
-            for(int z=0;z<numberStealth;z++){
+            for(int z=0;z<loopStealth;z++){
                 if(stealth[z]!=null){
                     stealth[z].move();
                     if(time4 - timeninj>=500){
@@ -279,7 +277,7 @@ public class Game{
 
                 for(int a=0;a<numCops;a++){
                     if(cops[a]!=null){
-                        for(int i=0;i<numberStrong;i++){
+                        for(int i=0;i<loopStrong;i++){
                             if(strong[i]!=null){
                                 boolean hit = cops[a].attack(strong[i].getX(),strong[i].getY(),strong[i].stealthRatio());
                                 double HP =1;
@@ -295,7 +293,7 @@ public class Game{
                             }
                         }
 
-                        for(int k=0;k<numberRange;k++){
+                        for(int k=0;k<loopRange;k++){
                             if(range[k]!=null){
                                 boolean hit = cops[a].attack(range[k].getX(),range[k].getY(),range[k].stealthRatio());
                                 double HP =1;
@@ -311,7 +309,7 @@ public class Game{
                             }
                         }
 
-                        for(int z=0;z<numberStealth;z++){
+                        for(int z=0;z<loopStealth;z++){
                             if(stealth[z]!=null){
                                 boolean hit = cops[a].attack(stealth[z].getX(),stealth[z].getY(),stealth[z].stealthRatio());
                                 double HP =1;
@@ -331,19 +329,28 @@ public class Game{
             }
 
             D=true;
-            if((this.numberStrong==0 && this.numberStealth==0 && this.numberRange==0)&& this.wallHP!=0){
+            if((this.numberStrong<=0 && this.numberStealth<=0 && this.numberRange<=0)&& this.wallHP!=0){
                 lose();
                 break;
             }
+
+            if(this.alarmHP<=0){
+                for(int z=0;z<numberStealth;z++){
+                    if(stealth[z]!=null){
+                        stealth[z].erase();
+                        stealth[z]=null;
+                    }
+                }
+            }
+
             if(wallHP<=0){
                 lv=true;
                 break;
             }
             UI.sleep(40);
-
-            if(lv){
-                nextLevel();
-            }
+        }
+        if(lv){
+            nextLevel();
         }
     }
 
@@ -365,7 +372,6 @@ public class Game{
                 if(stealth[z]!=null){
                     stealth[z].erase();
                 }
-
             }
             for(int a=0;a<numCops;a++){
                 if(cops[a]!=null){
