@@ -111,13 +111,13 @@ public class Figures{
     }
 
     public void move() {
-        if((this.positionX - width/2) > Game.wallX){
+        if((this.positionX) != Game.wallX){
             this.positionX = positionX - speed;
         }
     }
 
     public double attack() {
-        if (positionX < range) {
+        if ((this.positionX < range + 10)) {
             return strength;
         }
         else {
