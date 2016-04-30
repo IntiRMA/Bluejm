@@ -17,6 +17,7 @@ public class Store{
     public static int numStealthRange;
     public static int numStrongStealthRange;
     public static int Cash=5000;
+    public static int exitCount=1;
     int top =50;
     public static boolean draw=false;
     /**      */
@@ -30,23 +31,23 @@ public class Store{
 
         UI.setMouseListener(this::doMouse);
         UI.clearGraphics();
-        UI.setColor(Color.black);
+        UI.setColor(Color.red);
         UI.fillRect(0,0,700,700+top);
-        UI.setColor(Color.blue);
+        UI.setColor(Color.black);
         UI.setFontSize(50);
         UI.drawString("Store",300, 20+top);
         UI.setFontSize(20);
-        UI.drawRect(50,50+top,width,120);
+        UI.drawImage("stealthDude.png",50,50+top,width,120);
          UI.drawString("Octavio",50, 60+top+130);
-        UI.drawRect(50,200+top,width,height);
+        UI.drawImage("rangeStealth.png",50,200+top,width,height);
         UI.drawString("Dan",50, 210+top+130);
-        UI.drawRect(250,50+top,width,height);
+        UI.drawImage("strongDude.png",250,50+top,width,height);
         UI.drawString("Inti",250, 60+top+130);
-        UI.drawRect(250,200+top,width,height);
+        UI.drawImage("stealthStrong.png",250,200+top,width,height);
         UI.drawString("Sloth",250, 210+top+130);
-        UI.drawRect(400,50+top,width,height);
+        UI.drawImage("rangeDude.png",400,50+top,width,height);
         UI.drawString("Scylar",400, 60+top+130);
-        UI.drawRect(400,200+top,width,height);
+        UI.drawImage("strongRange.png",400,200+top,width,height);
         UI.drawString("Tyaan",400, 210+top+130);
         UI.drawRect(250,350+top,width,height);
         UI.drawString("Alexander The Great",250, 360+top+130);
@@ -73,6 +74,7 @@ public class Store{
     public void doMouse(String action, double x, double y){
         double xClick=0;
         double yClick=0;
+       
         if(action.equals("clicked")){
             xClick= x;
             yClick=y;
@@ -118,7 +120,7 @@ public class Store{
             this.numStrongStealthRange=this.numStrongStealthRange+1;
 
            
-        }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top){
+        }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top && (numStrong>0|| numStrongRange>0) ){
             draw= true;
         }
         UI.repaintGraphics();
