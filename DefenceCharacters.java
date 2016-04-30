@@ -18,7 +18,7 @@ public class DefenceCharacters{
     private double positionY;
     private String type;
     private double damage;
-    private double HP = 100;
+    double HP = 100;
 
     public DefenceCharacters(String name, double x2, double y2 ){
         this.type = name;
@@ -64,6 +64,11 @@ public class DefenceCharacters{
                 if (type.equals("level6")){
                     UI.drawImage("defenceCharacter.png", positionX, positionY, 50, 100);
                 }
+                UI.setColor(Color.black);
+                UI.drawRect(this.positionX-1,this.positionY - 21,51,11);
+                UI.setColor(Color.green.brighter());
+                UI.fillRect(this.positionX,this.positionY - 20,HP/2,10);
+
             });
     }
 
@@ -86,6 +91,8 @@ public class DefenceCharacters{
         if (type.equals("level6")){
             UI.eraseImage("defenceCharacter.png", positionX, positionY);
         }
+        UI.eraseRect(this.positionX-1,this.positionY - 19,51,11);
+
     }
 
     public double getY(){
@@ -104,30 +111,12 @@ public class DefenceCharacters{
         }
         return hit;
     }
+
     public double shot(double sht){
-        HP-=sht;
-        return HP;
+        this.HP-=sht;
+        return this.HP;
     }
 
-    public void surrender() {
-        if (type.equals("level1")){
-            UI.eraseImage("defenceCharacter.png", positionX, positionY);
-        }
-        if (type.equals("level2")){
-            UI.eraseImage("defenceCharacter.png", positionX, positionY);
-        }
-        if (type.equals("level3")){
-            UI.eraseImage("defenceCharacter.png", positionX, positionY);
-        }
-        if (type.equals("level4")){
-            UI.eraseImage("defenceCharacter.png", positionX, positionY);
-        }
-        if (type.equals("level5")){
-            UI.eraseImage("defenceCharacter.png", positionX, positionY);
-        }
-        if (type.equals("level6")){
-            UI.eraseImage("defenceCharacter.png", positionX, positionY);
-        }
-    }
+
 
 }

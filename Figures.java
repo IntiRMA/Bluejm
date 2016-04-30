@@ -20,7 +20,7 @@ public class Figures{
     private double positionX;
     private double positionY;
     private String type;
-    private double HP;
+    public double HP;
     private double width;
     public boolean alarm = true;
     private double alarmX = 10;
@@ -46,12 +46,12 @@ public class Figures{
             this.stealth = 1;
             this.positionX = x1;
             this.positionY = y1;
-            this.HP = 100;
+            this.HP = 150;
             this.width=60;
         }
         if (type.equals("rangeDude")) {
             this.speed = 1;
-            this.strength = 2;
+            this.strength = 0.1;
             this.range = Game.ArenaSizex;
             this.stealth = 2;
             this.positionX = x1;
@@ -93,26 +93,19 @@ public class Figures{
 
     public void draw(){
         SwingUtilities.invokeLater(()->{
+                double num = 2;
+                int extra=0;
                 if (type.equals("stealthDude")){
                     UI.drawImage("stealthDude.png", positionX, positionY,width, 90);
-                    UI.drawRect(positionX, positionY-5, width, 5);
-                    UI.setColor(Color.red);
-                    UI.fillRect(positionX+1, positionY-4, (width/100)*HP, 4);
-                    UI.setColor(Color.black);
+                    extra=15;
                 }
                 if (type.equals("strongDude")){
                     UI.drawImage("strongDude.png", positionX, positionY,width, 90);
-                    UI.drawRect(positionX, positionY-5, width, 5);
-                    UI.setColor(Color.red);
-                    UI.fillRect(positionX+1, positionY-4, (width/100)*HP, 4);
-                    UI.setColor(Color.black);
+                    num=3;
+                    extra=10;
                 }
                 if (type.equals("rangeDude")){
                     UI.drawImage("rangeDude.png", positionX, positionY,width, 90);
-                    UI.drawRect(positionX, positionY-5, width, 5);
-                    UI.setColor(Color.red);
-                    UI.fillRect(positionX+1, positionY-4, (width/100)*HP, 4);
-                    UI.setColor(Color.black);
                 }
                 if (type.equals("strongRange")){
                     UI.drawImage("strongRange.png", positionX, positionY,width, 90);
@@ -123,6 +116,10 @@ public class Figures{
                 if (type.equals("rangeStealth")){
                     UI.drawImage("rangeStealth.png", positionX, positionY,width, 90);
                 }
+                UI.setColor(Color.black);
+                UI.drawRect(this.positionX-1 + extra,this.positionY - 21,51,11);
+                UI.setColor(Color.red.brighter());
+                UI.fillRect(this.positionX + extra,this.positionY - 20,HP/num,10);
 
             });
     }
@@ -173,21 +170,21 @@ public class Figures{
     }
 
     public double attack() {
-        if ((this.positionX < 480)) {
-            return strength;
+        double dam=0;
+        if((this.positionY==90 &&this.positionX<=490)){
+            dam=this.strength;
+        }else if((this.positionY==162 &&this.positionX<=440)){
+            dam=this.strength;
+        }else if((this.positionY==234 &&this.positionX<=390)){
+            dam=this.strength;
+        }else if((this.positionY==306 &&this.positionX<=340)){
+            dam=this.strength;
         }
-        else {
-            return 0;
-        }
+        return dam;
     }
 
     public double attackCop() {
-        if (type.equals("rangeDude") || type.equals("strongRange")){
-            return strength;
-        }
-        else {
-            return 0;
-        }
+        return strength;
     }
 
     public double hit(){
