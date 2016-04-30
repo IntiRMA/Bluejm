@@ -9,20 +9,21 @@ import javax.swing.*;
  */
 public class Store{
     private String type;
-    public int numStealth=0;
-    public int numStrong=0;
-    public int numRange=0;
-    public int numStrongStealth;
-    public int numStrongRange;
-    public int numStealthRange;
-    public int numStrongStealthRange;
-    public int Cash=5000;
+    public static int numStealth;
+    public static int numStrong;
+    public static int numRange;
+    public static int numStrongStealth;
+    public static int numStrongRange;
+    public static int numStealthRange;
+    public static int numStrongStealthRange;
+    public static int Cash=5000;
     int top =50;
-    public boolean draw=false;
+    public static boolean draw=false;
     /**      */
     public Store(){
-        UI.clearGraphics();
+        //UI.clearGraphics();
         UI.repaintGraphics();
+        UI.setMouseListener(this::doMouse);
         //UI.addButton("Quit", UI::quit);
 
     }
@@ -43,16 +44,16 @@ public class Store{
          UI.drawString("Octavio",50, 60+top+130);
         UI.drawRect(50,200+top,width,height);
         UI.drawString("Dan",50, 210+top+130);
-        UI.drawRect(225,50+top,width,height);
-        UI.drawString("Inti",225, 60+top+130);
-        UI.drawRect(225,200+top,width,height);
-        UI.drawString("Sloth",225, 210+top+130);
+        UI.drawRect(250,50+top,width,height);
+        UI.drawString("Inti",250, 60+top+130);
+        UI.drawRect(250,200+top,width,height);
+        UI.drawString("Sloth",250, 210+top+130);
         UI.drawRect(400,50+top,width,height);
         UI.drawString("Scylar",400, 60+top+130);
         UI.drawRect(400,200+top,width,height);
         UI.drawString("Tyaan",400, 210+top+130);
-        UI.drawRect(225,350+top,width,height);
-        UI.drawString("Alexander The Great",225, 360+top+130);
+        UI.drawRect(250,350+top,width,height);
+        UI.drawString("Alexander The Great",250, 360+top+130);
         UI.fillRect(50, 500+top, 100,50);
         
         UI.setColor(Color.white);
@@ -62,12 +63,13 @@ public class Store{
         UI.setColor(Color.blue);
 
         UI.drawString("Cash: $"+Cash, 520, 50);
-        UI.drawString("stealth: "+numStealth,520,100);
-        UI.drawString("strong: "+numStrong,520,150);
-        UI.drawString("StrongRange: "+numStrongRange,520,250);
-        UI.drawString("StealthRange: "+numStealthRange,520,300);
-        UI.drawString("StrongStealth: "+numStrongStealth,520,350);
-        UI.drawString("range: "+numRange,520,200);
+        UI.drawString("stealth: "+this.numStealth,520,100);
+        UI.drawString("strong: "+this.numStrong,520,150);
+        UI.drawString("StrongRange: "+this.numStrongRange,520,250);
+        UI.drawString("StealthRange: "+this.numStealthRange,520,300);
+        UI.drawString("StrongStealth: "+this.numStrongStealth,520,350);
+        UI.drawString("range: "+this.numRange,520,200);
+        UI.repaintGraphics();
         UI.sleep(40);
 
     }
@@ -82,48 +84,48 @@ public class Store{
         }
         if(xClick>50 && xClick<150 && yClick>50+top && yClick<50+120+top && Cash>49){
             //stealth
-            numStealth=numStealth+1;
+            this.numStealth=this.numStealth+1;
             Cash=Cash-50;
 
-        }else if(xClick>50 && xClick<150 && yClick>200 +top && yClick<200+120+top && Cash>499 && numStealth>0&& numRange>0){
+        }else if(xClick>50 && xClick<150 && yClick>200 +top && yClick<200+120+top && Cash>499 && this.numStealth>0&& this.numRange>0){
             //stealth&&range
-            numStealthRange=numStealthRange+1;
+            this.numStealthRange=this.numStealthRange+1;
             Cash=Cash-500;
-            numRange=numRange-1;
-            numStealth=numStealth-1;
+            this.numRange=this.numRange-1;
+            this.numStealth=this.numStealth-1;
 
         }else if(xClick>250 && xClick<350 && yClick>50+top && yClick<50+120+top && Cash>49){
             //strong
-            numStrong=numStrong+1;
+            this.numStrong=this.numStrong+1;
             Cash=Cash-50;
 
-        }else if(xClick>250 && xClick<350 && yClick>200+top && yClick<200+120+top &&Cash>800 &&numStrong>0 && numStealth>0){
+        }else if(xClick>250 && xClick<350 && yClick>200+top && yClick<200+120+top &&Cash>800 &&this.numStrong>0 && this.numStealth>0){
             //Strong+Stealth
-            numStrongStealth=numStrongStealth+1;
+            this.numStrongStealth=this.numStrongStealth+1;
             Cash=Cash-800;
-            numStrong=numStrong-1;
-            numStealth=numStealth-1;
+            this.numStrong=this.numStrong-1;
+            this.numStealth=this.numStealth-1;
 
         }else if(xClick>400 && xClick<500 && yClick>50+top && yClick<50+120+top && Cash>49){
             //Range
-            numRange=numRange+1;
+            this.numRange=this.numRange+1;
             Cash=Cash-50;
-        }else if(xClick>400 && xClick<550 && yClick>200+top && yClick<200+120+top && Cash>1199 &&numStrong>0 && numRange>0){
+        }else if(xClick>400 && xClick<550 && yClick>200+top && yClick<200+120+top && Cash>1199 &&this.numStrong>0 && this.numRange>0){
             //Strong and range
-            numStrongRange=numStrongRange+1;
+            this.numStrongRange=this.numStrongRange+1;
             Cash=Cash-1200;
-            numStrong=numStrong-1;
-            numRange=numRange+1;
+            this.numStrong=this.numStrong-1;
+            this.numRange=this.numRange+1;
 
         }
-        else if(xClick>250 && xClick<350 && yClick>350+top && yClick<350+120+top&& Cash>3000 && numStrong>0 &&numStealth>0 &&numRange>0){
-            numStrongStealthRange=numStrongStealthRange+1;
+        else if(xClick>250 && xClick<350 && yClick>350+top && yClick<350+120+top&& Cash>3000 && this.numStrong>0 &&this.numStealth>0 &&this.numRange>0){
+            this.numStrongStealthRange=this.numStrongStealthRange+1;
 
            
         }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top){
             draw= true;
         }
-
+        UI.repaintGraphics();
     }
 
     public boolean bool(){
@@ -131,27 +133,27 @@ public class Store{
     }
 
     public int strong(){
-        return numStrong;
+        return this.numStrong;
     }
 
     public int range(){
-        return numRange;
+        return this.numRange;
     }
 
     public int stealth(){
-        return numStealth;
+        return this.numStealth;
     }
     public int stealthRange(){
-        return numStealthRange;
+        return this.numStealthRange;
     }
     public int strongStealth(){
-        return numStrongStealth;
+        return this.numStrongStealth;
     }
     public int strongRange(){
-        return numStrongRange;
+        return this.numStrongRange;
     }
     public int strongStealthRange(){
-        return numStrongStealthRange;
+        return this.numStrongStealthRange;
     }
 
     /*public static void main(String[] args){

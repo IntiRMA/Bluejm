@@ -32,6 +32,7 @@ public class Game{
     private boolean ALARM;
     private String stat ="";
     int numCops=0;
+    Store shop = new Store();
 
     Figures[] strong = new Figures[100];
     Figures[] stealth = new Figures[100];
@@ -65,18 +66,22 @@ public class Game{
     }
 
     public void intro(){
-        UI.setFontSize(25);
-        UI.setColor(Color.red);
-        UI.drawString("This game is called Heist!!",200,100);
+        UI.setColor(Color.black);
+        UI.fillRect(0,0,1000,700);
+        UI.setFontSize(75);
+        UI.setColor(Color.blue);
+        UI.drawString("Heist!!",200,100);
         UI.sleep(1000);
         UI.setFontSize(16);
-        UI.setColor(Color.black);
-        UI.drawString("your goal is to rob a bank!",200,150);
-        UI.drawString("you will get to upgrade Figuress and also get new ones, the robbery will be more dificult each level ",200,200);
+
+        UI.drawString("your goal is to rob a bank, different characters have different attributes for you to discover!",100,150);
+        UI.drawString("Evil warlord jakku has been Stealing memes and hiding them deep in an underground vault for his eyes only",100,200);
+        UI.drawString("you will get to upgrade Figures and also get new ones, the robbery will be more dificult each level ",100,250);
+        UI.drawString("Figure out the best combinations to beat the game and return the memes to the people! ",100,300);
         UI.setColor(Color.red.brighter());
         UI.setFontSize(25);
         UI.sleep(1000);
-        UI.drawString("When you are ready press SPACE",200,300);
+        UI.drawString("When you are ready press SPACE",200,350);
     }
 
     public void controls(String key){
@@ -96,7 +101,7 @@ public class Game{
 
     public void store(){
         boolean T =false;
-        Store shop = new Store();
+
         while (T==false){
             shop.drawStore();
             this.numberStrong = shop.strong();
@@ -107,6 +112,7 @@ public class Game{
             this.rangeLeft = this.numberRange;
             T=shop.bool();
         }
+        Store.draw=false;
         startGame();
     }
 
@@ -123,7 +129,11 @@ public class Game{
         if(level==1){
             this.wallHP=100;
             this.wallStartHP=100;
-            this.alarmHP=10;
+            this.alarmHP=100;
+        }else{
+            this.wallHP=100*level;
+            this.wallStartHP=100*level;
+            this.alarmHP=100*level;
         }
         UI.setMouseListener(this::mouse);
         UI.setKeyListener(this::controls);
@@ -138,26 +148,32 @@ public class Game{
             }
             if(action.equalsIgnoreCase("pressed") && this.type.equals("strong")){
                 if(st<numberStrong && (position>0 && position<ArenaSize)){
-                    strong[st] = new Figures("strongDude",ArenaSizex-100,this.position);
-                    st++;
-                    this.strongLeft--;
-                    this.action="";
+                    if(strong[st]==null){
+                        strong[st] = new Figures("strongDude",ArenaSizex-100,this.position);
+                        st++;
+                        this.strongLeft--;
+                        this.action="";
+                    }
                 }
             }
             if(action.equalsIgnoreCase("pressed") && this.type.equals("range")){
                 if(rg<numberRange && (position>0 && position<ArenaSize)){
-                    range[rg] = new Figures("rangeDude",ArenaSizex-100,this.position);
-                    rg++;
-                    this.rangeLeft--;
-                    this.action="";
+                    if(range[rg]==null){
+                        range[rg] = new Figures("rangeDude",ArenaSizex-100,this.position);
+                        rg++;
+                        this.rangeLeft--;
+                        this.action="";
+                    }
                 }
             }
             if(action.equalsIgnoreCase("pressed") && this.type.equals("stealth")){
                 if(stl<numberStealth && (position>0 && position<ArenaSize)){
-                    stealth[stl] = new Figures("stealthDude",ArenaSizex-100,this.position);
-                    stl++;
-                    this.stealthLeft--;
-                    this.action="";
+                    if(stealth[stl]==null){
+                        stealth[stl] = new Figures("stealthDude",ArenaSizex-100,this.position);
+                        stl++;
+                        this.stealthLeft--;
+                        this.action="";
+                    }
                 }
             }
             calen=Calendar.getInstance();
@@ -213,7 +229,9 @@ public class Game{
                 }
             }
             for(int a=0;a<numCops;a++){
-                cops[a].draw();
+                if(cops[a]!=null){
+                    cops[a].draw();
+                }
             }
             D=true;
             if((this.numberStrong==0 && this.numberStealth==0 && this.numberRange==0)&& this.wallHP!=0){
@@ -271,11 +289,22 @@ public class Game{
                 cops[c]=null;
 
             }
-            UI.repaintGraphics();
+            UI.clearGraphics();
+            defy=0;
+            defx=250;
+            UI.repaintAllGraphics();
+            Store.Cash+=500*level;
+            Store.numStealth=0;
+            Store.numStrong=0;
+            Store.numRange=0;
+            Store.numStrongStealth=0;
+            Store.numStrongRange=0;
+            Store.numStealthRange=0;
+            Store.numStrongStealthRange=0;
 
-            //             UI.sleep(10);
-            //             UI.drawString("NEXT LEVEL",400,200);
-            //             UI.sleep(5000);
+                //             UI.sleep(10);
+                //             UI.drawString("NEXT LEVEL",400,200);
+                //             UI.sleep(5000);
             store();
         }else{
             won();
@@ -346,7 +375,7 @@ public class Game{
                 UI.setLineWidth(1);
                 UI.drawRect(ArenaSizex+9,19,51,16);
                 UI.setColor(Color.green.brighter());
-                UI.fillRect(ArenaSizex+10,20,wallHP/2,15);
+                UI.fillRect(ArenaSizex+10,20,wallHP/(2*level),15);
 
                 UI.setColor(Color.green.brighter());
                 UI.drawString("ALARM STATUS",ArenaSizex+9,50);
@@ -354,7 +383,7 @@ public class Game{
                 UI.setLineWidth(1);
                 UI.drawRect(ArenaSizex+9,59,51,16);
                 UI.setColor(Color.red.brighter());
-                UI.fillRect(ArenaSizex+10,60,alarmHP*5,15);
+                UI.fillRect(ArenaSizex+10,60,alarmHP/(2*level),15);
                 if(this.alarmHP<10&&this.alarmHP!=0){
                     this.stat="disabling";
                 }
