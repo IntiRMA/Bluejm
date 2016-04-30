@@ -222,6 +222,8 @@ public class Game{
             }
             cal = Calendar.getInstance();
             if(ALARM){
+                defy=90;
+                defx=430;
                 for(int a=0;a<numCops;a++){
                     if(cops[a]==null){
                         cops[a] = new DefenceCharacters (("level" + Integer.toString(level)),this.defx,this.defy);

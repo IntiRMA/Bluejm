@@ -93,25 +93,24 @@ public class Figures{
     public void draw(){
         SwingUtilities.invokeLater(()->{
                 if (type.equals("stealthDude")){
-                    UI.drawImage("stealthDude.png", positionX, positionY,width, 72);
+                    UI.drawImage("stealthDude.png", positionX, positionY,width, 90);
                 }
                 if (type.equals("strongDude")){
-                    UI.drawImage("strongDude.png", positionX, positionY,width, 72);
+                    UI.drawImage("strongDude.png", positionX, positionY,width, 90);
                 }
                 if (type.equals("rangeDude")){
-                    UI.drawImage("rangeDude.png", positionX, positionY,width, 72);
+                    UI.drawImage("rangeDude.png", positionX, positionY,width, 90);
                 }
                 if (type.equals("strongRange")){
-                    UI.drawImage("strongRange.png", positionX, positionY,width, 72);
+                    UI.drawImage("strongRange.png", positionX, positionY,width, 90);
                 }
                 if (type.equals("stealthStrong")){
-                    UI.drawImage("stealthStrong.png", positionX, positionY,width, 72);
+                    UI.drawImage("stealthStrong.png", positionX, positionY,width, 90);
                 }
                 if (type.equals("rangeStealth")){
-                    UI.drawImage("rangeStealth.png", positionX, positionY,width, 72);
+                    UI.drawImage("rangeStealth.png", positionX, positionY,width, 90);
                 }
 
-                
             });
     }
 
@@ -138,12 +137,18 @@ public class Figures{
 
     public void move() {
         if (this.type.equalsIgnoreCase("stealthDude")){
-            if((this.positionX) != alarmX + 50){
+            if(this.positionX>=80){
                 this.positionX = positionX - speed;
             }
         }
         if (this.type.equalsIgnoreCase("strongDude")){
-            if((this.positionX) != Game.wallX){
+            if((this.positionY==90 &&this.positionX>=480)){
+                this.positionX = positionX - speed;
+            }else if((this.positionY==162 &&this.positionX>=430)){
+                this.positionX = positionX - speed;
+            }else if((this.positionY==234 &&this.positionX>=380)){
+                this.positionX = positionX - speed;
+            }else if((this.positionY==306 &&this.positionX>=330)){
                 this.positionX = positionX - speed;
             }
         }
