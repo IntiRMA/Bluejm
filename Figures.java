@@ -36,7 +36,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
-            this.width=71;
+            this.width=72;
         }
         if (type.equals("strongDude")) {
             this.speed = 1;
@@ -46,7 +46,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
-            this.width=118;
+            this.width=60;
         }
         if (type.equals("rangeDude")) {
             this.speed = 1;
@@ -56,7 +56,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
-            this.width=51.1;
+            this.width=50;
         }
         if (type.equals("strongRange")) {
             this.speed = 1;
@@ -66,7 +66,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
-            this.width=51.1;
+            this.width=57;
         }
         if (type.equals("stealthStrong")) {
             this.speed = 2;
@@ -76,7 +76,7 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
-            this.width=51.1;
+            this.width=67;
         }
         if (type.equals("rangeStealth")) {
             this.speed = 1;
@@ -86,29 +86,29 @@ public class Figures{
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
-            this.width=51.1;
+            this.width=51.5;
         }
     }
 
     public void draw(){
         SwingUtilities.invokeLater(()->{
                 if (type.equals("stealthDude")){
-                    UI.drawImage("stealthDude.png", positionX, positionY,width, 100);
+                    UI.drawImage("stealthDude.png", positionX, positionY,width, 72);
                 }
                 if (type.equals("strongDude")){
-                    UI.drawImage("strongDude.png", positionX, positionY,width, 100);
+                    UI.drawImage("strongDude.png", positionX, positionY,width, 72);
                 }
                 if (type.equals("rangeDude")){
-                    UI.drawImage("rangeDude.png", positionX, positionY,width, 100);
+                    UI.drawImage("rangeDude.png", positionX, positionY,width, 72);
                 }
                 if (type.equals("strongRange")){
-                    UI.drawImage("strongRange.png", positionX, positionY,width, 100);
+                    UI.drawImage("strongRange.png", positionX, positionY,width, 72);
                 }
                 if (type.equals("stealthStrong")){
-                    UI.drawImage("stealthStrong.png", positionX, positionY,width, 100);
+                    UI.drawImage("stealthStrong.png", positionX, positionY,width, 72);
                 }
                 if (type.equals("rangeStealth")){
-                    UI.drawImage("rangeStealth.png", positionX, positionY,width, 100);
+                    UI.drawImage("rangeStealth.png", positionX, positionY,width, 72);
                 }
 
                 
@@ -166,17 +166,4 @@ public class Figures{
         }
         return i;
     }
-
-    public void die() {
-        if (type.equals("stealthDude")){
-            UI.eraseImage("stealthDude.png", positionX, positionY);
-        }
-        if (type.equals("strongDude")){
-            UI.eraseImage("strongDude.png", positionX, positionY);
-        }
-        if (type.equals("rangeDude")){
-            UI.eraseImage("rangeDude.png", positionX, positionY);
-        }
-    }
-
 }

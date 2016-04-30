@@ -11,6 +11,4 @@ comment4.params=
 comment4.target=double\ attack()
 comment5.params=alarmY
 comment5.target=double\ alarmOFF(double)
-comment6.params=
-comment6.target=void\ die()
-numComments=7
+numComments=6
