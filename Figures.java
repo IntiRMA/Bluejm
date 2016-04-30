@@ -14,7 +14,7 @@ public class Figures{
 
     //fields
     private int speed;
-    private int strength;
+    private double strength;
     private double range;
     private int stealth;
     private double positionX;
@@ -24,6 +24,7 @@ public class Figures{
     private double width;
     public boolean alarm = true;
     private double alarmX = 10;
+    double i=0;
 
     public Figures(String name, double x1, double y1){
         this.type = name;
@@ -109,12 +110,42 @@ public class Figures{
                 if (type.equals("rangeStealth")){
                     UI.drawImage("rangeStealth.png", positionX, positionY,width, 100);
                 }
+
+                
             });
     }
 
+    public void erase(){
+        if (type.equals("stealthDude")){
+            UI.eraseImage("stealthDude.png", positionX, positionY);
+        }
+        if (type.equals("strongDude")){
+            UI.eraseImage("strongDude.png", positionX, positionY);
+        }
+        if (type.equals("rangeDude")){
+            UI.eraseImage("rangeDude.png", positionX, positionY);
+        }
+        if (type.equals("strongRange")){
+            UI.eraseImage("strongRange.png", positionX, positionY);
+        }
+        if (type.equals("stealthStrong")){
+            UI.eraseImage("stealthStrong.png", positionX, positionY);
+        }
+        if (type.equals("rangeStealth")){
+            UI.eraseImage("rangeStealth.png", positionX, positionY);
+        }
+    }
+
     public void move() {
-        if((this.positionX) != Game.wallX){
-            this.positionX = positionX - speed;
+        if (this.type.equalsIgnoreCase("stealthDude")){
+            if((this.positionX) != alarmX + 50){
+                this.positionX = positionX - speed;
+            }
+        }
+        if (this.type.equalsIgnoreCase("strongDude")){
+            if((this.positionX) != Game.wallX){
+                this.positionX = positionX - speed;
+            }
         }
     }
 
@@ -127,19 +158,13 @@ public class Figures{
         }
     }
 
-    public boolean alarmOFF(double alarmY) {
+    public double alarmOFF(double alarmY) {
         if (type.equals("stealthDude") || type.equals("stealthStrong")) {
-            if (positionX > alarmX && positionX < alarmX+50 && positionY > alarmY && positionY < alarmY+50) {
-                UI.eraseOval(10, 0, 50, 50);
-                UI.eraseOval(10, 100, 50, 50);
-                UI.eraseOval(10, 200, 50, 50);
-                UI.eraseOval(10, 300, 50, 50);
+            if ((positionX < alarmX + 60) && positionY >= alarmY && positionY<=alarmY+50 ) {
+                i=strength;
             }
-            else{
-                alarm=true;
-            }
-            return strength;
         }
+        return i;
     }
 
     public void die() {

@@ -65,6 +65,26 @@ public class DefenceCharacters{
         }
     });
     }
+    public void erase(){
+         if (type.equals("level1")){
+            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+        }
+        if (type.equals("level2")){
+            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+        }
+        if (type.equals("level3")){
+            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+        }
+        if (type.equals("level4")){
+            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+        }
+        if (type.equals("level5")){
+            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+        }
+        if (type.equals("level6")){
+            UI.eraseImage("defenceCharacter.jpg", positionX, positionY);
+        }
+    }
     
     public void attack() {
         

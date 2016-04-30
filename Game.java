@@ -30,6 +30,8 @@ public class Game{
     private int stealthLeft=0;
     private int alarmy;
     private boolean ALARM;
+    private String stat ="";
+    int numCops=0;
 
     Figures[] strong = new Figures[100];
     Figures[] stealth = new Figures[100];
@@ -39,12 +41,10 @@ public class Game{
     public Game(){
         UI.initialise();
         intro();
-
         UI.setKeyListener(this::controls);
     }
 
     public void mouse(String ev,double x,double y){
-
         if(ev.equalsIgnoreCase("pressed")){
             if(y<ArenaSize){
                 this.position = y;
@@ -102,33 +102,28 @@ public class Game{
             this.numberStrong = shop.strong();
             this.numberStealth = shop.stealth();
             this.numberRange = shop.range();
-
             this.strongLeft = this.numberStrong;
             this.stealthLeft = this.numberStealth;
             this.rangeLeft = this.numberRange;
-
             T=shop.bool();
-
         }
-
         startGame();
     }
 
     public void startGame(){
-
         draw();
         int st = 0;
         int rg= 0;
         int stl = 0;
         int c = 0;
-        int numCops=0;
+        numCops=0;
         boolean D=false;
         boolean lv =false;
         alarm();
         if(level==1){
-            wallHP=100;
-            wallStartHP=100;
-            alarmHP=10;
+            this.wallHP=100;
+            this.wallStartHP=100;
+            this.alarmHP=10;
         }
         UI.setMouseListener(this::mouse);
         UI.setKeyListener(this::controls);
@@ -137,12 +132,10 @@ public class Game{
         time = calen.getTimeInMillis();
         this.currentTime = cal.getTimeInMillis();
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0)&& this.wallHP!=0){
-
             UI.setKeyListener(this::controls);
             if(D){
                 draw();
             }
-
             if(action.equalsIgnoreCase("pressed") && this.type.equals("strong")){
                 if(st<numberStrong && (position>0 && position<ArenaSize)){
                     strong[st] = new Figures("strongDude",ArenaSizex-100,this.position);
@@ -151,7 +144,6 @@ public class Game{
                     this.action="";
                 }
             }
-
             if(action.equalsIgnoreCase("pressed") && this.type.equals("range")){
                 if(rg<numberRange && (position>0 && position<ArenaSize)){
                     range[rg] = new Figures("rangeDude",ArenaSizex-100,this.position);
@@ -174,8 +166,8 @@ public class Game{
                 if(strong[i]!=null){
                     strong[i].move();
                     if(time2 - time>=500){
-                        wallHP-=strong[i].attack();
-                        time=time2;
+                        this.wallHP-=strong[i].attack();
+                        //time=time2;
                     }
                     strong[i].draw();
                 }
@@ -183,9 +175,10 @@ public class Game{
             for(int k=0;k<numberRange;k++){
                 if(range[k]!=null){
                     range[k].move();
-                    if(time2 - time>=500){
-                        //wallHP-=range[k].attack();
-                    }
+                    //                     if(time2 - time>=500){
+                    //                         wallHP-=range[k].attack();
+                    //                         
+                    //                     }
                     range[k].draw();
                 }
             }
@@ -199,13 +192,11 @@ public class Game{
                             ALARM=false;
                         }
                     }
-
                     stealth[z].draw();
                 }
             }
             cal = Calendar.getInstance();
             if(((D==false )|| (cal.getTimeInMillis() - this.currentTime)>= 5000) && c<100 && ALARM){
-
                 cops[c] = new DefenceCharacters (("level" + Integer.toString(level)),this.defx,this.defy);
                 c++;
                 this.defy+=100;
@@ -221,11 +212,9 @@ public class Game{
                     this.currentTime = cal.getTimeInMillis();
                 }
             }
-
             for(int a=0;a<numCops;a++){
                 cops[a].draw();
             }
-
             D=true;
             if((this.numberStrong==0 && this.numberStealth==0 && this.numberRange==0)&& this.wallHP!=0){
                 lose();
@@ -240,12 +229,34 @@ public class Game{
         if(lv){
             nextLevel();
         }
-
     }
 
     public void nextLevel(){
         if(this.level<6){
+            UI.clearGraphics();
             this.level++;
+            for(int i=0;i<numberStrong;i++){
+                if(strong[i]!=null){
+                    strong[i].erase();
+                }
+            }
+            for(int k=0;k<numberRange;k++){
+                if(range[k]!=null){
+                    range[k].erase();
+                }
+            }
+            for(int z=0;z<numberStealth;z++){
+                if(stealth[z]!=null){
+                    stealth[z].erase();
+                }
+
+            }
+            for(int a=0;a<numCops;a++){
+                if(cops[a]!=null){
+                    cops[a].erase();
+                }
+            }
+
             for(int i=0;i<numberStrong;i++){
                 strong[i]=null;
             }
@@ -260,6 +271,11 @@ public class Game{
                 cops[c]=null;
 
             }
+            UI.repaintGraphics();
+
+            //             UI.sleep(10);
+            //             UI.drawString("NEXT LEVEL",400,200);
+            //             UI.sleep(5000);
             store();
         }else{
             won();
@@ -267,7 +283,6 @@ public class Game{
     }
 
     public void alarm() {
-
         double alarmPosition = Math.random();
         if (alarmPosition > 0 && alarmPosition < 0.25){
             alarmy = 0;
@@ -282,16 +297,17 @@ public class Game{
             alarmy = 300;
         }
         ALARM = true;
-
     }
 
     public void won(){
+        UI.clearGraphics();
         UI.drawString("YOU WIN!!!",200,350);
         UI.sleep(1000);
         UI.drawString("to play again press SPACE",200,450);
     }
 
     public void lose(){
+        UI.clearGraphics();
         UI.drawString("YOU LOOSE!!!",200,350);
         UI.sleep(1000);
         UI.drawString("to play again press SPACE",200,450);
@@ -331,21 +347,31 @@ public class Game{
                 UI.drawRect(ArenaSizex+9,19,51,16);
                 UI.setColor(Color.green.brighter());
                 UI.fillRect(ArenaSizex+10,20,wallHP/2,15);
-                
+
                 UI.setColor(Color.green.brighter());
-                UI.drawString("ALARM HP",ArenaSizex+9,30);
+                UI.drawString("ALARM STATUS",ArenaSizex+9,50);
                 UI.setColor(Color.black);
                 UI.setLineWidth(1);
-                UI.drawRect(ArenaSizex+9,39,51,16);
+                UI.drawRect(ArenaSizex+9,59,51,16);
                 UI.setColor(Color.red.brighter());
-                UI.fillRect(ArenaSizex+10,40,alarmHP/2,15);
-                
+                UI.fillRect(ArenaSizex+10,60,alarmHP*5,15);
+                if(this.alarmHP<10&&this.alarmHP!=0){
+                    this.stat="disabling";
+                }
+                if(this.alarmHP<=0){
+                    UI.setColor(Color.green.brighter());
+                    this.stat="disabled";
+                }
+                UI.drawString(this.stat,ArenaSizex+65,73.5);
                 if(ALARM){
                     UI.setColor(Color.red);
                     UI.fillOval(10, alarmy, 50, 50);
                     UI.setColor(Color.black);
+                }else{
+                    UI.setColor(Color.green.brighter());
+                    UI.fillOval(10, alarmy, 50, 50);
+                    UI.setColor(Color.black);
                 }
-
                 UI.repaintAllGraphics();
             });
     }
