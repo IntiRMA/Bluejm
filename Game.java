@@ -241,13 +241,13 @@ public class Game{
                     drawWall();
                     UI.setFontSize(15);
                     UI.drawString("for this character press 1",0,ArenaSize + 20);
-                    UI.drawImage("stealthDude.jpg",50,ArenaSize + 40,50,100);
+                    UI.drawImage("stealthDude.png",50,ArenaSize + 40,50,100);
 
                     UI.drawString("for this character press 2",200,ArenaSize + 20);
-                    UI.drawImage("strongDude.jpg",225,ArenaSize + 40,150,100);
+                    UI.drawImage("strongDude.png",225,ArenaSize + 40,150,100);
 
                     UI.drawString("for this character press 3",400,ArenaSize + 20);
-                    UI.drawImage("rangeDude.jpg",450,ArenaSize + 40,50,100);
+                    UI.drawImage("rangeDude.png",450,ArenaSize + 40,50,100);
 
                     UI.repaintAllGraphics();
                 });
@@ -257,7 +257,7 @@ public class Game{
             if (this.wallHP == this.wallStartHP/2){
                 this.wall=this.wall + "broke";
             }
-            UI.drawImage(this.wall + ".jpg",wallX,0,20,ArenaSize);
+            UI.drawImage(this.wall + ".png",wallX,0,20,ArenaSize);
         }
 
         public static void main(String[] arguments){
