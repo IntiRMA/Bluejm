@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.Color;
 import javax.swing.*;
+import sun.audio.*;
 
 /** <description of class Store>
  */
@@ -38,7 +39,7 @@ public class Store{
         UI.drawString("Store",300, 20+top);
         UI.setFontSize(20);
         UI.drawImage("stealthDude.png",50,50+top,width,120);
-         UI.drawString("Octavio",50, 60+top+130);
+        UI.drawString("Octavio",50, 60+top+130);
         UI.drawImage("rangeStealth.png",50,200+top,width,height);
         UI.drawString("Dan",50, 210+top+130);
         UI.drawImage("strongDude.png",250,50+top,width,height);
@@ -52,9 +53,9 @@ public class Store{
         UI.drawRect(250,350+top,width,height);
         UI.drawString("Alexander The Great",250, 360+top+130);
         UI.fillRect(50, 500+top, 100,50);
-        
+
         UI.setColor(Color.white);
-        
+
         UI.setFontSize(20);
         UI.drawString("Play!",75,500+top+25);
         UI.setColor(Color.blue);
@@ -74,11 +75,11 @@ public class Store{
     public void doMouse(String action, double x, double y){
         double xClick=0;
         double yClick=0;
-       
+
         if(action.equals("clicked")){
             xClick= x;
             yClick=y;
-
+            this.playSound();
         }
         if(xClick>50 && xClick<150 && yClick>50+top && yClick<50+120+top && Cash>49){
             //stealth
@@ -119,7 +120,6 @@ public class Store{
         else if(xClick>250 && xClick<350 && yClick>350+top && yClick<350+120+top&& Cash>3000 && this.numStrong>0 &&this.numStealth>0 &&this.numRange>0){
             this.numStrongStealthRange=this.numStrongStealthRange+1;
 
-           
         }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top && (numStrong>0|| numStrongRange>0) ){
             draw= true;
         }
@@ -141,17 +141,37 @@ public class Store{
     public int stealth(){
         return this.numStealth;
     }
+
     public int stealthRange(){
         return this.numStealthRange;
     }
+
     public int strongStealth(){
         return this.numStrongStealth;
     }
+
     public int strongRange(){
         return this.numStrongRange;
     }
+
     public int strongStealthRange(){
         return this.numStrongStealthRange;
+    }
+
+    private void playSound() {
+        try
+        {
+            // get the sound file as a resource out of my jar file;
+            // the sound file must be in the same directory as this class file.
+            // the input stream portion of this recipe comes from a javaworld.com article.
+            InputStream inputStream = getClass().getResourceAsStream("ding.mp3");
+            AudioStream audioStream = new AudioStream(inputStream);
+            AudioPlayer.player.start(audioStream);
+        }
+        catch (Exception e)
+        {
+            UI.println("didnt work m8");
+        }
     }
 
     /*public static void main(String[] args){
