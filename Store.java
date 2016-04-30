@@ -21,8 +21,8 @@ public class Store{
     public boolean draw=false;
     /**      */
     public Store(){
-       UI.clearGraphics();
-       UI.repaintGraphics();
+        UI.clearGraphics();
+        UI.repaintGraphics();
         //UI.addButton("Quit", UI::quit);
 
     }
