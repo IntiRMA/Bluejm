@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.Color;
 import javax.swing.*;
-import sun.audio.*;
+
 
 /** <description of class Store>
  */
@@ -17,7 +17,7 @@ public class Store{
     public static int numStrongRange;
     public static int numStealthRange;
     public static int numStrongStealthRange;
-    public static int Cash=50000;
+    public static int Cash=500;
     public static int exitCount=1;
     int top =50;
     public static boolean draw=false;
@@ -39,19 +39,18 @@ public class Store{
         UI.drawString("Store",300, 20+top);
         UI.setFontSize(20);
         UI.drawImage("stealthDude.png",50,50+top,width,120);
-        UI.drawString("Octavio",50, 60+top+130);
+        UI.drawString("Octavio: $150",50, 60+top+130);
         UI.drawImage("rangeStealth.png",50,200+top,width,height);
-        UI.drawString("Dan",50, 210+top+130);
+        UI.drawString("Dan: $500",50, 210+top+130);
         UI.drawImage("strongDude.png",250,50+top,width,height);
-        UI.drawString("Inti",250, 60+top+130);
+        UI.drawString("Inti: $100",250, 60+top+130);
         UI.drawImage("stealthStrong.png",250,200+top,width,height);
-        UI.drawString("Sloth",250, 210+top+130);
+        UI.drawString("Sloth: $1200",250, 210+top+130);
         UI.drawImage("rangeDude.png",400,50+top,width,height);
-        UI.drawString("Scylar",400, 60+top+130);
+        UI.drawString("Tyaan: 50",400, 60+top+130);
         UI.drawImage("strongRange.png",400,200+top,width,height);
-        UI.drawString("Tyaan",400, 210+top+130);
-        UI.drawRect(250,350+top,width,height);
-        UI.drawString("Alexander The Great",250, 360+top+130);
+        UI.drawString("Alex: $2000",400, 210+top+130);
+        
         UI.fillRect(50, 500+top, 100,50);
 
         UI.setColor(Color.white);
@@ -79,12 +78,12 @@ public class Store{
         if(action.equals("clicked")){
             xClick= x;
             yClick=y;
-            this.playSound();
+           
         }
-        if(xClick>50 && xClick<150 && yClick>50+top && yClick<50+120+top && Cash>49){
+        if(xClick>50 && xClick<150 && yClick>50+top && yClick<50+120+top && Cash>149){
             //stealth
             this.numStealth=this.numStealth+1;
-            Cash=Cash-50;
+            Cash=Cash-150;
 
         }else if(xClick>50 && xClick<150 && yClick>200 +top && yClick<200+120+top && Cash>499 && this.numStealth>0&& this.numRange>0){
             //stealth&&range
@@ -93,15 +92,15 @@ public class Store{
             this.numRange=this.numRange-1;
             this.numStealth=this.numStealth-1;
 
-        }else if(xClick>250 && xClick<350 && yClick>50+top && yClick<50+120+top && Cash>49){
+        }else if(xClick>250 && xClick<350 && yClick>50+top && yClick<50+120+top && Cash>99){
             //strong
             this.numStrong=this.numStrong+1;
-            Cash=Cash-50;
+            Cash=Cash-100;
 
-        }else if(xClick>250 && xClick<350 && yClick>200+top && yClick<200+120+top &&Cash>800 &&this.numStrong>0 && this.numStealth>0){
+        }else if(xClick>250 && xClick<350 && yClick>200+top && yClick<200+120+top &&Cash>1199 &&this.numStrong>0 && this.numStealth>0){
             //Strong+Stealth
             this.numStrongStealth=this.numStrongStealth+1;
-            Cash=Cash-800;
+            Cash=Cash-1200;
             this.numStrong=this.numStrong-1;
             this.numStealth=this.numStealth-1;
 
@@ -109,10 +108,10 @@ public class Store{
             //Range
             this.numRange=this.numRange+1;
             Cash=Cash-50;
-        }else if(xClick>400 && xClick<550 && yClick>200+top && yClick<200+120+top && Cash>1199 &&this.numStrong>0 && this.numRange>0){
+        }else if(xClick>400 && xClick<550 && yClick>200+top && yClick<200+120+top && Cash>1999 &&this.numStrong>0 && this.numRange>0){
             //Strong and range
             this.numStrongRange=this.numStrongRange+1;
-            Cash=Cash-1200;
+            Cash=Cash-2000;
             this.numStrong=this.numStrong-1;
             this.numRange=this.numRange-1;
 
@@ -158,17 +157,7 @@ public class Store{
         return this.numStrongStealthRange;
     }
 
-    private void playSound() {
-        try{
-            InputStream inputStream = getClass().getResourceAsStream("ding.wav");
-            AudioStream audioStream = new AudioStream(inputStream);
-            AudioPlayer.player.start(audioStream);
-        }
-        catch (Exception e)
-        {
-            UI.println("didnt work m8");
-        }
-    }
+   
 
     /*public static void main(String[] args){
     Store obj = new Store();
