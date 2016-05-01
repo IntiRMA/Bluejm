@@ -630,7 +630,7 @@ public class Game{
             defy=0;
             defx=250;
             UI.repaintAllGraphics();
-            Store.Cash+=(500*level)/1.25;
+            Store.Cash+=(500*level)/1.111111111111;
             Store.numStealth=0;
             Store.numStrong=0;
             Store.numRange=0;
