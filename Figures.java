@@ -33,7 +33,7 @@ public class Figures{
             this.speed = 2;
             this.strength = 3;
             this.range = Game.wallX;
-            this.stealth = 3.2;
+            this.stealth = 3.4;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 25;
@@ -46,7 +46,7 @@ public class Figures{
             this.stealth = 1;
             this.positionX = x1;
             this.positionY = y1;
-            this.HP = 150;
+            this.HP = 200;
             this.width=60;
         }
         if (type.equals("rangeDude")) {
@@ -63,10 +63,10 @@ public class Figures{
             this.speed = 1;
             this.strength = 7;
             this.range = Game.ArenaSizex;
-            this.stealth = 1.5;
+            this.stealth = 1;
             this.positionX = x1;
             this.positionY = y1;
-            this.HP = 200;
+            this.HP = 300;
             this.width=57;
         }
         if (type.equals("stealthStrong")) {
@@ -83,7 +83,7 @@ public class Figures{
             this.speed = 1;
             this.strength = 3;
             this.range = Game.ArenaSizex;;
-            this.stealth = 9;
+            this.stealth = 7;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 100;
@@ -102,7 +102,7 @@ public class Figures{
                 }
                 if (type.equals("strongDude")){
                     UI.drawImage("strongDude.png", positionX, positionY,width, 90);
-                    num=3;
+                    num=4;
                     extra=10;
                 }
                 if (type.equals("rangeDude")){
@@ -110,6 +110,7 @@ public class Figures{
                 }
                 if (type.equals("strongRange")){
                     UI.drawImage("strongRange.png", positionX, positionY,width, 90);
+                    num=6;
                 }
                 if (type.equals("stealthStrong")){
                     UI.drawImage("stealthStrong.png", positionX, positionY,width, 90);
