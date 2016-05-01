@@ -41,6 +41,12 @@ public class Game{
     private static final int numCops=4;
     Store shop = new Store();
     boolean firstRound=true;
+    int loopStrong = 0;
+    int loopStealth = 0;
+    int loopRange = 0;
+    int loopStealthStrong= 0;
+    int loopStrongRange= 0;
+    int loopRangeStealth= 0;
 
     Figures[] strong = new Figures[50];
     Figures[] stealth = new Figures[50];
@@ -86,7 +92,7 @@ public class Game{
         UI.setFontSize(16);
 
         UI.drawString("your goal is to rob a bank, different characters have different attributes for you to discover!",100,150);
-        UI.drawString("Evil warlord jakku has been Stealing memes and hiding them deep in an underground vault for his eyes only",100,200);
+        UI.drawString("An evil overlord has been Stealing memes and hiding them deep in an underground vault for his eyes only",100,200);
         UI.drawString("you will get to upgrade Figures and also get new ones, the robbery will be more dificult each level ",100,250);
         UI.drawString("Figure out the best combinations to beat the game and return the memes to the people! ",100,300);
         UI.setColor(Color.red.brighter());
@@ -184,12 +190,12 @@ public class Game{
         long timegun = gun.getTimeInMillis();
         long timern = timegun;
         long timecop = timegun;
-        int loopStrong = this.numberStrong;
-        int loopStealth = this.numberStealth;
-        int loopRange = this.numberRange;
-        int loopStealthStrong= this.numberStealthStrong;
-        int loopStrongRange= this.numberStrongRange;
-        int loopRangeStealth= this.numberRangeStealth;
+        loopStrong = this.numberStrong;
+        loopStealth = this.numberStealth;
+        loopRange = this.numberRange;
+        loopStealthStrong= this.numberStealthStrong;
+        loopStrongRange= this.numberStrongRange;
+        loopRangeStealth= this.numberRangeStealth;
 
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0 ||this.numberStealthStrong!=0 || this.numberStrongRange!=0 || this.numberRangeStealth!=0 )&& this.wallHP!=0){
             //UI.setKeyListener(this::controls);
@@ -589,12 +595,12 @@ public class Game{
         if(this.level<6){
             UI.clearGraphics();
             this.level++;
-            for(int i=0;i<numberStrong;i++){
+            for(int i=0;i<loopStrong;i++){
                 if(strong[i]!=null){
                     strong[i].erase();
                 }
             }
-            for(int k=0;k<numberRange;k++){
+            for(int k=0;k<loopRange;k++){
                 if(range[k]!=null){
                     range[k].erase();
                 }
@@ -605,28 +611,37 @@ public class Game{
                 }
             }
 
-            for(int i=0;i<numberStrong;i++){
+            for(int i=0;i<loopStrong;i++){
                 strong[i]=null;
             }
-            for(int k=0;k<numberRange;k++){
+
+            for(int k=0;k<loopRange;k++){
                 range[k]=null;
             }
             for(int c=0;c<numCops;c++){
                 cop[c]=null;
 
             }
-            for(int b=0;b<numberStealthStrong;b++){
+            for(int b=0;b<loopStealthStrong;b++){
                 stealthStrong[b]=null;
             }
 
-            for(int e=0;e<numberStrongRange;e++){
+            for(int e=0;e<loopStrongRange;e++){
                 strongRange[e]=null;
             }
 
-            for(int h=0;h<numberRangeStealth;h++){
+            for(int h=0;h<loopRangeStealth;h++){
                 rangeStealth[h]=null;
             }
+
+            for(int z=0;z<loopStealth;z++){
+                if(stealth[z]!=null){
+                    stealth[z].erase();
+                    stealth[z]=null;
+                }
+            }
             UI.clearGraphics();
+            this.stat="";
             defy=0;
             defx=250;
             UI.repaintAllGraphics();
@@ -661,12 +676,12 @@ public class Game{
     }
 
     public void lose(){
-        for(int i=0;i<numberStrong;i++){
+        for(int i=0;i<loopStrong;i++){
             if(strong[i]!=null){
                 strong[i].erase();
             }
         }
-        for(int k=0;k<numberRange;k++){
+        for(int k=0;k<loopRange;k++){
             if(range[k]!=null){
                 range[k].erase();
             }
@@ -676,30 +691,29 @@ public class Game{
                 cop[a].erase();
             }
         }
-        UI.clearGraphics();
-        for(int i=0;i<numberStrong;i++){
+        for(int i=0;i<loopStrong;i++){
             strong[i]=null;
         }
-        for(int k=0;k<numberRange;k++){
+        for(int k=0;k<loopRange;k++){
             range[k]=null;
         }
         for(int c=0;c<numCops;c++){
             cop[c]=null;
 
         }
-        for(int b=0;b<numberStealthStrong;b++){
+        for(int b=0;b<loopStealthStrong;b++){
             stealthStrong[b]=null;
         }
 
-        for(int e=0;e<numberStrongRange;e++){
+        for(int e=0;e<loopStrongRange;e++){
             strongRange[e]=null;
         }
 
-        for(int h=0;h<numberRangeStealth;h++){
+        for(int h=0;h<loopRangeStealth;h++){
             rangeStealth[h]=null;
         }
-        UI.clearGraphics();
-        UI.eraseRect(0,0,1200,900);
+        //UI.clearGraphics();
+        //UI.eraseRect(0,0,1200,900);
         UI.clearGraphics();
         UI.sleep(40);
         UI.repaintAllGraphics();

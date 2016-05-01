@@ -26,49 +26,51 @@ public class Store{
     }
     //drawing the store
     public void drawStore(){
-        int height=120;
-        int width=100;
+        //SwingUtilities.invokeLater(()->{
+                int height=120;
+                int width=100;
 
-        UI.setMouseListener(this::doMouse);
-        UI.clearGraphics();
-        UI.setColor(Color.red);
-        UI.fillRect(0, 0, 1200, 1000);
-        UI.setColor(Color.red);
-        UI.fillRect(0,0,700,700+top);
-        UI.setColor(Color.black);
-        UI.setFontSize(50);
-        UI.drawString("Store",300, 20+top);
-        UI.setFontSize(20);
-        UI.drawImage("stealthDude.png",50,50+top,width,120);
-        UI.drawString("Octavio: $150",50, 60+top+130);
-        UI.drawImage("rangeStealth.png",50,200+top,width,height);
-        UI.drawString("Dan: $500",50, 210+top+130);
-        UI.drawImage("strongDude.png",250,50+top,width,height);
-        UI.drawString("Inti: $100",250, 60+top+130);
-        UI.drawImage("stealthStrong.png",250,200+top,width,height);
-        UI.drawString("Sloth: $1200",250, 210+top+130);
-        UI.drawImage("rangeDude.png",400,50+top,width,height);
-        UI.drawString("Tyaan: 50",400, 60+top+130);
-        UI.drawImage("strongRange.png",400,200+top,width,height);
-        UI.drawString("Alex: $2000",400, 210+top+130);
+                UI.setMouseListener(this::doMouse);
+                UI.clearGraphics();
+                UI.setColor(Color.red);
+                UI.fillRect(0, 0, 1200, 1000);
+                UI.setColor(Color.red);
+                UI.fillRect(0,0,700,700+top);
+                UI.setColor(Color.black);
+                UI.setFontSize(50);
+                UI.drawString("Store",300, 20+top);
+                UI.setFontSize(20);
+                UI.drawImage("stealthDude.png",50,50+top,width,120);
+                UI.drawString("Octavio: $150",50, 60+top+130);
+                UI.drawImage("rangeStealth.png",50,200+top,width,height);
+                UI.drawString("Dan: $500",50, 210+top+130);
+                UI.drawImage("strongDude.png",250,50+top,width,height);
+                UI.drawString("Inti: $100",250, 60+top+130);
+                UI.drawImage("stealthStrong.png",250,200+top,width,height);
+                UI.drawString("Sloth: $1200",250, 210+top+130);
+                UI.drawImage("rangeDude.png",400,50+top,width,height);
+                UI.drawString("Tyaan: 50",400, 60+top+130);
+                UI.drawImage("strongRange.png",400,200+top,width,height);
+                UI.drawString("Alex: $2000",400, 210+top+130);
 
-        UI.fillRect(50, 500+top, 100,50);
+                UI.fillRect(50, 500+top, 100,50);
 
-        UI.setColor(Color.white);
+                UI.setColor(Color.white);
 
-        UI.setFontSize(20);
-        UI.drawString("Play!",75,500+top+25);
-        UI.setColor(Color.black);
+                UI.setFontSize(20);
+                UI.drawString("Play!",75,500+top+25);
+                UI.setColor(Color.black);
 
-        UI.drawString("Cash: $"+Cash, 620, 50);
-        UI.drawString("Stealth: "+this.numStealth,620,100);
-        UI.drawString("Strong: "+this.numStrong,620,150);
-        UI.drawString("StrongRange: "+this.numStrongRange,620,250);
-        UI.drawString("StealthRange: "+this.numStealthRange,620,300);
-        UI.drawString("StrongStealth: "+this.numStrongStealth,620,350);
-        UI.drawString("Range: "+this.numRange,620,200);
-        UI.repaintGraphics();
-        UI.sleep(40);
+                UI.drawString("Cash: $"+Cash, 620, 50);
+                UI.drawString("Stealth: "+this.numStealth,620,100);
+                UI.drawString("Strong: "+this.numStrong,620,150);
+                UI.drawString("StrongRange: "+this.numStrongRange,620,250);
+                UI.drawString("StealthRange: "+this.numStealthRange,620,300);
+                UI.drawString("StrongStealth: "+this.numStrongStealth,620,350);
+                UI.drawString("Range: "+this.numRange,620,200);
+                UI.repaintGraphics();
+                UI.sleep(40);
+            //});
 
     }
 
@@ -157,7 +159,6 @@ public class Store{
     public int strongStealthRange(){
         return this.numStrongStealthRange;
     }
-
 
     /*public static void main(String[] args){
     Store obj = new Store();
