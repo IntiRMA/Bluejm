@@ -726,26 +726,47 @@ public class Game{
                 UI.setColor(Color.black);
                 UI.setLineWidth(2);
                 UI.clearGraphics();
+                UI.setColor(Color.green.darker());
+                UI.fillRect(0, 0, 1200, 1000);
                 UI.drawRect(left,top,ArenaSizex,ArenaSize);
                 drawWall();
+
                 UI.setColor(Color.black);
                 UI.setFontSize(15);
-                UI.drawString("for this character press 1",0,ArenaSize + 20);
-                UI.drawImage("stealthDude.png",50,ArenaSize + 40,50,100);
+                UI.drawString("Press 1",40, ArenaSize + 20);
+                UI.drawImage("stealthDude.png",20, ArenaSize + 40 ,72,90);
                 UI.setColor(Color.red.brighter());
-                UI.drawString(( Integer.toString(this.stealthLeft) + "X"),70,ArenaSize + 160);
+                UI.drawString(( Integer.toString(this.stealthLeft) + "X"),40,ArenaSize + 150);
 
                 UI.setColor(Color.black);
-                UI.drawString("for this character press 2",200,ArenaSize + 20);
-                UI.drawImage("strongDude.png",225,ArenaSize + 40,150,100);
+                UI.drawString("Press 2",190,ArenaSize + 20);
+                UI.drawImage("strongDude.png",170,ArenaSize + 40,60,90);
                 UI.setColor(Color.red.brighter());
-                UI.drawString(( Integer.toString(this.strongLeft) + "X"),290,ArenaSize + 160);
+                UI.drawString(( Integer.toString(this.strongLeft) + "X"),190,ArenaSize + 150);
 
                 UI.setColor(Color.black);
-                UI.drawString("for this character press 3",400,ArenaSize + 20);
-                UI.drawImage("rangeDude.png",450,ArenaSize + 40,50,100);
+                UI.drawString("Press 3",340,ArenaSize + 20);
+                UI.drawImage("rangeDude.png",320,ArenaSize + 40,50,90);
                 UI.setColor(Color.red.brighter());
-                UI.drawString(( Integer.toString(this.rangeLeft) + "X"),470,ArenaSize + 160);
+                UI.drawString(( Integer.toString(this.rangeLeft) + "X"),340,ArenaSize + 150);
+
+                UI.setColor(Color.black);
+                UI.drawString("Press 4",490,ArenaSize + 20);
+                UI.drawImage("rangeStealth.png",470,ArenaSize + 40,51.5,90);
+                UI.setColor(Color.red.brighter());
+                UI.drawString(( Integer.toString(this.rangeStealthLeft) + "X"),490,ArenaSize + 150);
+
+                UI.setColor(Color.black);
+                UI.drawString("Press 5",640,ArenaSize + 20);
+                UI.drawImage("strongRange.png",620,ArenaSize + 40,57,90);
+                UI.setColor(Color.red.brighter());
+                UI.drawString(( Integer.toString(this.strongRangeLeft) + "X"),640,ArenaSize + 150);
+
+                UI.setColor(Color.black);
+                UI.drawString("Press 6",790,ArenaSize + 20);
+                UI.drawImage("stealthStrong.png",770,ArenaSize + 40,67,90);
+                UI.setColor(Color.red.brighter());
+                UI.drawString(( Integer.toString(this.stealthStrongLeft) + "X"),790,ArenaSize + 150);
 
                 UI.setColor(Color.red.brighter());
                 UI.drawString("WALL HP",ArenaSizex+9,12);
@@ -785,6 +806,9 @@ public class Game{
 
     public void drawWall(){
         if (this.wallHP <= this.wallStartHP/2){
+            UI.drawImage(this.wall + "halfbroke" + Integer.toString(level) + ".png",0,0,ArenaSizex,ArenaSize);
+        }
+        if (this.wallHP <= this.wallStartHP/4){
             UI.drawImage(this.wall + "broke" + Integer.toString(level) + ".png",0,0,ArenaSizex,ArenaSize);
         }
         if((this.wallHP > this.wallStartHP/2)){
