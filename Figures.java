@@ -86,7 +86,7 @@ public class Figures{
             this.stealth = 7;
             this.positionX = x1;
             this.positionY = y1;
-            this.HP = 100;
+            this.HP = 200;
             this.width=51.5;
         }
     }
@@ -117,6 +117,7 @@ public class Figures{
                 }
                 if (type.equals("rangeStealth")){
                     UI.drawImage("rangeStealth.png", positionX, positionY,width, 90);
+                    num=4;
                 }
                 UI.setColor(Color.black);
                 UI.drawRect(this.positionX-1 + extra,this.positionY - 21,51,11);

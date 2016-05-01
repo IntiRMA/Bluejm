@@ -119,10 +119,10 @@ public class Game{
             this.type="rangeStealth";
         }
         if(key.equalsIgnoreCase("5")){
-            this.type="stealthStrong";
+            this.type= "strongRange";
         }
         if(key.equalsIgnoreCase("6")){
-            this.type="strongRange";
+            this.type= "stealthStrong";
         }
 
     }
@@ -669,10 +669,62 @@ public class Game{
     }
 
     public void won(){
+        for(int i=0;i<loopStrong;i++){
+            if(strong[i]!=null){
+                strong[i].erase();
+            }
+        }
+        for(int k=0;k<loopRange;k++){
+            if(range[k]!=null){
+                range[k].erase();
+            }
+        }
+        for(int a=0;a<numCops;a++){
+            if(cop[a]!=null){
+                cop[a].erase();
+            }
+        }
+        for(int i=0;i<loopStrong;i++){
+            strong[i]=null;
+        }
+        for(int k=0;k<loopRange;k++){
+            range[k]=null;
+        }
+        for(int c=0;c<numCops;c++){
+            cop[c]=null;
+
+        }
+        for(int b=0;b<loopStealthStrong;b++){
+            stealthStrong[b]=null;
+        }
+
+        for(int e=0;e<loopStrongRange;e++){
+            strongRange[e]=null;
+        }
+
+        for(int h=0;h<loopRangeStealth;h++){
+            rangeStealth[h]=null;
+        }
+        //UI.clearGraphics();
+        //UI.eraseRect(0,0,1200,900);
         UI.clearGraphics();
+        UI.sleep(40);
+        UI.repaintAllGraphics();
+        UI.clearGraphics();
+        UI.setColor(Color.red);
         UI.drawString("YOU WIN!!!",200,350);
         UI.sleep(1000);
+        UI.repaintAllGraphics();
+        firstRound=true;
         UI.drawString("to play again press SPACE",200,450);
+        Store.numStealth=0;
+        Store.numStrong=0;
+        Store.numRange=0;
+        Store.numStrongStealth=0;
+        Store.numStrongRange=0;
+        Store.numStealthRange=0;
+        Store.numStrongStealthRange=0;
+        Store.Cash=500;
     }
 
     public void lose(){
@@ -719,7 +771,7 @@ public class Game{
         UI.repaintAllGraphics();
         UI.clearGraphics();
         UI.setColor(Color.red);
-        UI.drawString("YOU LOOSE!!!",200,350);
+        UI.drawString("YOU LOSE!!!",200,350);
         UI.sleep(1000);
         UI.repaintAllGraphics();
         firstRound=true;

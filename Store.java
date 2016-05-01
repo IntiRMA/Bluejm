@@ -122,7 +122,7 @@ public class Store{
         else if(xClick>250 && xClick<350 && yClick>350+top && yClick<350+120+top&& Cash>3000 && this.numStrong>0 &&this.numStealth>0 &&this.numRange>0){
             this.numStrongStealthRange=this.numStrongStealthRange+1;
 
-        }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top && (numStrong>0|| numStrongRange>0) ){
+        }else if(xClick>50 && xClick<150 && yClick>500+top && yClick<550+top && (numStrong>0|| numStrongRange>0||numStrongStealth>=0) ){
             draw= true;
         }
         UI.repaintGraphics();
