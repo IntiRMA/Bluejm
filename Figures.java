@@ -151,12 +151,12 @@ public class Figures{
     }
 
     public void move() {
-        if (this.type.equalsIgnoreCase("stealthDude")){
+        if (this.type.equalsIgnoreCase("stealthDude")||this.type.equalsIgnoreCase("stealthStrong")){
             if(this.positionX>=50){
                 this.positionX = positionX - speed;
             }
         }
-        if (this.type.equalsIgnoreCase("strongDude")||this.type.equalsIgnoreCase("stealthStrong")){
+        if (this.type.equalsIgnoreCase("strongDude")){
             if((this.positionY==90 &&this.positionX>=480)){
                 this.positionX = positionX - speed;
             }else if((this.positionY==162 &&this.positionX>=430)){
@@ -227,6 +227,11 @@ public class Figures{
     public double alarmOFF(double alarmY) {
         if (type.equals("stealthDude") || type.equals("stealthStrong")) {
             if ((positionX < alarmX + 60) && positionY >= alarmY && positionY<=alarmY+50 ) {
+                i=strength;
+            }
+        }
+        if(type.equals("rangeStealth")){
+          if ( positionY >= alarmY && positionY<=alarmY+50) {
                 i=strength;
             }
         }
