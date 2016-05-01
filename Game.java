@@ -21,7 +21,7 @@ public class Game{
     public double alarmHP;
     public double alarmStartHP;
     private String wall = "level";
-    private int level=1;
+    public static int level=1;
     private String type = "strong";
     private double position;
     private String action="";
@@ -97,6 +97,7 @@ public class Game{
 
     public void controls(String key){
         if(key.equalsIgnoreCase("space")&&firstRound){
+            level=1;
             store();
         }
         if(key.equalsIgnoreCase("1")){
@@ -325,7 +326,6 @@ public class Game{
                 }
             }
 
-
             long time9 = calen.getTimeInMillis();
             for(int e=0;e<loopStrongRange;e++){
                 if(strongRange[e]!=null){
@@ -456,7 +456,7 @@ public class Game{
             //cops attack
             cal = Calendar.getInstance();
             long time5 = cal.getTimeInMillis();
-            if(time5 - timecop >= 250){
+            if(time5 - timecop >= 500){
                 timecop=time5;
                 for(int a=0;a<numCops;a++){
                     if(this.cop[a]!=null){
@@ -710,6 +710,14 @@ public class Game{
         UI.repaintAllGraphics();
         firstRound=true;
         UI.drawString("to play again press SPACE",200,450);
+        Store.numStealth=0;
+        Store.numStrong=0;
+        Store.numRange=0;
+        Store.numStrongStealth=0;
+        Store.numStrongRange=0;
+        Store.numStealthRange=0;
+        Store.numStrongStealthRange=0;
+        Store.Cash=500;
     }
 
     public void draw(){

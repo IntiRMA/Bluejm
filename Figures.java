@@ -33,10 +33,10 @@ public class Figures{
             this.speed = 2;
             this.strength = 3;
             this.range = Game.wallX;
-            this.stealth = 4;
+            this.stealth = 3;
             this.positionX = x1;
             this.positionY = y1;
-            this.HP = 100;
+            this.HP = 25;
             this.width=72;
         }
         if (type.equals("strongDude")) {
@@ -98,6 +98,7 @@ public class Figures{
                 if (type.equals("stealthDude")){
                     UI.drawImage("stealthDude.png", positionX, positionY,width, 90);
                     extra=15;
+                    num=0.5;
                 }
                 if (type.equals("strongDude")){
                     UI.drawImage("strongDude.png", positionX, positionY,width, 90);
@@ -212,7 +213,19 @@ public class Figures{
     }
 
     public double hit(){
+        if(Game.level==1){
+        this.HP-=0.5;
+    }else if(Game.level==2){
+        this.HP-=1;
+    }else if(Game.level==3){
+        this.HP-=1.5;
+    }else if(Game.level==4){
         this.HP-=2;
+    }else if(Game.level==5){
+        this.HP-=2.5;
+    }else if(Game.level==6){
+        this.HP-=3;
+    }
         return this.HP;
     }
 
