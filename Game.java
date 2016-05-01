@@ -13,6 +13,9 @@ public class Game{
     private int numberStrong;
     private int numberStealth;
     private int numberRange;
+    private int numberStealthStrong;
+    private int numberStrongRange;
+    private int numberRangeStealth;
     private double wallHP;
     private double wallStartHP;
     public double alarmHP;
@@ -29,6 +32,9 @@ public class Game{
     private int rangeLeft=0;
     private int strongLeft=0;
     private int stealthLeft=0;
+    private int stealthStrongLeft=0;
+    private int strongRangeLeft=0;
+    private int rangeStealthLeft=0;
     private int alarmy;
     private boolean ALARM=true;
     private String stat ="";
@@ -39,6 +45,9 @@ public class Game{
     Figures[] strong = new Figures[50];
     Figures[] stealth = new Figures[50];
     Figures[] range = new Figures[50];
+    Figures[] stealthStrong = new Figures[50];
+    Figures[] strongRange = new Figures[50];
+    Figures[] rangeStealth = new Figures[50];
     DefenceCharacters[] cop = new DefenceCharacters [4];
 
     public Game(){
@@ -99,6 +108,16 @@ public class Game{
         if(key.equalsIgnoreCase("3")){
             this.type="range";
         }
+        if(key.equalsIgnoreCase("4")){
+            this.type="rangeStealth";
+        }
+        if(key.equalsIgnoreCase("5")){
+            this.type="stealthStrong";
+        }
+        if(key.equalsIgnoreCase("6")){
+            this.type="strongRange";
+        }
+        
     }
 
     public void store(){
@@ -109,9 +128,15 @@ public class Game{
             this.numberStrong = shop.strong();
             this.numberStealth = shop.stealth();
             this.numberRange = shop.range();
+            this.numberStealthStrong=shop.strongStealth();
+            this.numberStrongRange=shop.strongRange();
+            this.numberRangeStealth=shop.stealthRange();
             this.strongLeft = this.numberStrong;
             this.stealthLeft = this.numberStealth;
             this.rangeLeft = this.numberRange;
+            this.stealthStrongLeft= this.numberStealthStrong;
+            this.strongRangeLeft= this.numberStrongRange;
+            this.rangeStealthLeft= this.numberRangeStealth;
             T=shop.bool();
             if(T){
                 break;
@@ -126,6 +151,9 @@ public class Game{
         int st = 0;
         int rg= 0;
         int stl = 0;
+        int stst=0;
+        int sr=0;
+        int rs=0;
         int c = 0;
         boolean D=false;
         boolean lv =false;
@@ -155,6 +183,9 @@ public class Game{
         int loopStrong = this.numberStrong;
         int loopStealth = this.numberStealth;
         int loopRange = this.numberRange;
+        int loopStealthStrong= this.numberStealthStrong;
+        int loopStrongRange= this.numberStrongRange;
+        int loopRangeStealth= this.numberRangeStealth;
 
         while((this.numberStrong!=0 || this.numberStealth!=0 || this.numberRange!=0)&& this.wallHP!=0){
             //UI.setKeyListener(this::controls);
@@ -193,6 +224,36 @@ public class Game{
                     }
                 }
             }
+            if(action.equalsIgnoreCase("pressed") && this.type.equals("strongRange")){
+                if(sr<loopStrongRange && (position>0 && position<ArenaSize)){
+                    if(strongRange[sr]==null){
+                        strongRange[sr] = new Figures("strongRange",ArenaSizex-100,this.position);
+                        sr++;
+                        this.strongRangeLeft--;
+                        this.action="";
+                    }
+                }
+            }
+            if(action.equalsIgnoreCase("pressed") && this.type.equals("rangeStealth")){
+                if(rs<loopRangeStealth && (position>0 && position<ArenaSize)){
+                    if(rangeStealth[rs]==null){
+                        rangeStealth[rs] = new Figures("rangeStealth",ArenaSizex-100,this.position);
+                        rs++;
+                        this.rangeStealthLeft--;
+                        this.action="";
+                    }
+                }
+            }
+            if(action.equalsIgnoreCase("pressed") && this.type.equals("stealthStrong")){
+                if(stst<loopStealthStrong && (position>0 && position<ArenaSize)){
+                    if(stealthStrong[stst]==null){
+                        stealthStrong[stst] = new Figures("stealthStrong",ArenaSizex-100,this.position);
+                        stst++;
+                        this.stealthStrongLeft--;
+                        this.action="";
+                    }
+                }
+            }
             calen=Calendar.getInstance();
             long time2 = calen.getTimeInMillis();
             for(int i=0;i<loopStrong;i++){
@@ -205,6 +266,7 @@ public class Game{
                     strong[i].draw();
                 }
             }
+          
             gun=Calendar.getInstance();
             long time3 = gun.getTimeInMillis();
             for(int k=0;k<loopRange;k++){
@@ -229,11 +291,68 @@ public class Game{
                     stealth[z].draw();
                 }
             }
+            
+            for(int b=0;b<loopStealthStrong;b++){
+                if(stealthStrong[b]!=null){
+                    
+                    stealthStrong[b].move();
+                       
+                    stealthStrong[b].draw();
+                    
+                }
+            }
+            
+            long time9 = calen.getTimeInMillis();
+            for(int e=0;e<loopStrongRange;e++){
+                if(strongRange[e]!=null){
+                    timegun = time3;
+                    double damage = strongRange[e].attackCop();
+                    double HP=0;
+                    for(int a=0;a<numCops;a++){
+
+                        if(this.cop[a]!=null){
+
+                            if((strongRange[e].getY())<(this.cop[a].getY()+20)&&(strongRange[e].getY())>(this.cop[a].getY()-20)){
+                                HP = this.cop[a].shot(damage/14);
+
+                            }
+                            if(this.cop[a].HP<=0){
+                                this.cop[a].erase();
+                                this.cop[a]=null;
+
+                            }
+                        }else{
+                            continue;
+                        }
+
+                    }
+                    
+                    strongRange[e].move();
+                    if(time9 - time>=500){
+                        this.wallHP-=strongRange[e].rangeAttack();
+                        time=time9;
+                    }
+                    strongRange[e].draw();
+                }
+            }
+            
+            for(int h=0;h<loopRangeStealth;h++){
+                if(rangeStealth[h]!=null){
+                    
+                    
+                       
+                    rangeStealth[h].draw();
+                    //rangeStealth[h].move();
+                }
+            }
 
             if(ALARM){
                 defy=90;
                 defx=430;
                 for(int a=0;a<numCops;a++){
+                    
+                    
+                    
                     if(this.cop[a]==null){
                         this.cop[a] = new DefenceCharacters (("level" + Integer.toString(level)),this.defx,this.defy);
 
@@ -303,6 +422,21 @@ public class Game{
                                 }
                             }
                         }
+                        for (int e=0;e<loopStrongRange;e++){
+                            if(strongRange[e]!=null){
+                                boolean hit = this.cop[a].attack(strongRange[e].getX(),strongRange[e].getY(),strongRange[e].stealthRatio());
+                                double HP =1;
+                                if(hit){
+                                    HP = strongRange[e].hit();
+
+                                }
+                                if (this.strongRange[e].HP<=0){
+                                    strongRange[e].erase();
+                                    strongRange[e]=null;
+                                    numberStrongRange--;
+                                }
+                            }
+                        }
 
                         for(int k=0;k<loopRange;k++){
                             if(range[k]!=null){
@@ -353,7 +487,7 @@ public class Game{
 
             if(this.alarmHP<=0){
                 this.numberStealth=0;
-                for(int z=0;z<numberStealth;z++){
+                for(int z=0;z<loopStealth;z++){
                     if(stealth[z]!=null){
                         stealth[z].erase();
                         stealth[z]=null;
@@ -388,7 +522,7 @@ public class Game{
                     this.cop[a].erase();
                 }
             }
-
+ 
             for(int i=0;i<numberStrong;i++){
                 strong[i]=null;
             }
@@ -398,6 +532,18 @@ public class Game{
             for(int c=0;c<numCops;c++){
                 cop[c]=null;
 
+            }
+            for(int b=0;b<numberStealthStrong;b++){
+               stealthStrong[b]=null;
+            }
+            
+            
+            for(int e=0;e<numberStrongRange;e++){
+                strongRange[e]=null;
+            }
+            
+            for(int h=0;h<numberRangeStealth;h++){
+             rangeStealth[h]=null;
             }
             UI.clearGraphics();
             defy=0;
@@ -460,6 +606,18 @@ public class Game{
             cop[c]=null;
 
         }
+         for(int b=0;b<numberStealthStrong;b++){
+               stealthStrong[b]=null;
+            }
+            
+            
+            for(int e=0;e<numberStrongRange;e++){
+                strongRange[e]=null;
+            }
+            
+            for(int h=0;h<numberRangeStealth;h++){
+             rangeStealth[h]=null;
+            }
         UI.clearGraphics();
         UI.eraseRect(0,0,1200,900);
         UI.clearGraphics();

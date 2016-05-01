@@ -156,7 +156,7 @@ public class Figures{
                 this.positionX = positionX - speed;
             }
         }
-        if (this.type.equalsIgnoreCase("strongDude")){
+        if (this.type.equalsIgnoreCase("strongDude")||this.type.equalsIgnoreCase("stealthStrong")){
             if((this.positionY==90 &&this.positionX>=480)){
                 this.positionX = positionX - speed;
             }else if((this.positionY==162 &&this.positionX>=430)){
@@ -164,6 +164,17 @@ public class Figures{
             }else if((this.positionY==234 &&this.positionX>=380)){
                 this.positionX = positionX - speed;
             }else if((this.positionY==306 &&this.positionX>=330)){
+                this.positionX = positionX - speed;
+            }
+        }
+        if (this.type.equalsIgnoreCase("strongRange")){
+            if((this.positionY==90 &&this.positionX>=630)){
+                this.positionX = positionX - speed;
+            }else if((this.positionY==162 &&this.positionX>=580)){
+                this.positionX = positionX - speed;
+            }else if((this.positionY==234 &&this.positionX>=530)){
+                this.positionX = positionX - speed;
+            }else if((this.positionY==306 &&this.positionX>=480)){
                 this.positionX = positionX - speed;
             }
         }
@@ -178,6 +189,19 @@ public class Figures{
         }else if((this.positionY==234 &&this.positionX<=390)){
             dam=this.strength;
         }else if((this.positionY==306 &&this.positionX<=340)){
+            dam=this.strength;
+        }
+        return dam;
+    }
+    public double rangeAttack(){
+        double dam=0;
+        if((this.positionY==90 &&this.positionX<=690)){
+            dam=this.strength;
+        }else if((this.positionY==162 &&this.positionX<=640)){
+            dam=this.strength;
+        }else if((this.positionY==234 &&this.positionX<=590)){
+            dam=this.strength;
+        }else if((this.positionY==306 &&this.positionX<=540)){
             dam=this.strength;
         }
         return dam;

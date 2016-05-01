@@ -17,7 +17,7 @@ public class Store{
     public static int numStrongRange;
     public static int numStealthRange;
     public static int numStrongStealthRange;
-    public static int Cash=5000;
+    public static int Cash=50000;
     public static int exitCount=1;
     int top =50;
     public static boolean draw=false;
@@ -114,7 +114,7 @@ public class Store{
             this.numStrongRange=this.numStrongRange+1;
             Cash=Cash-1200;
             this.numStrong=this.numStrong-1;
-            this.numRange=this.numRange+1;
+            this.numRange=this.numRange-1;
 
         }
         else if(xClick>250 && xClick<350 && yClick>350+top && yClick<350+120+top&& Cash>3000 && this.numStrong>0 &&this.numStealth>0 &&this.numRange>0){
