@@ -101,7 +101,7 @@ public class DefenceCharacters{
 
     public boolean attack(double x,double y,double st){
         boolean hit=false;
-        if(y<positionY + 10 && y>positionY - 10&& x > positionX){
+        if(/*y<positionY + 10 && y>positionY - 10&&*/ x > positionX){
             double num = Math.random();
             if(num<=st){
                 hit=true;
