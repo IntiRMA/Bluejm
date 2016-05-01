@@ -33,7 +33,7 @@ public class Figures{
             this.speed = 2;
             this.strength = 3;
             this.range = Game.wallX;
-            this.stealth = 3;
+            this.stealth = 3.2;
             this.positionX = x1;
             this.positionY = y1;
             this.HP = 25;
@@ -66,7 +66,7 @@ public class Figures{
             this.stealth = 1.5;
             this.positionX = x1;
             this.positionY = y1;
-            this.HP = 100;
+            this.HP = 200;
             this.width=57;
         }
         if (type.equals("stealthStrong")) {
